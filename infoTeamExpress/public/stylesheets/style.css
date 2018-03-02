@@ -1,0 +1,67 @@
+/* GENERALE */
+body{
+  transition: all 0.9s;
+}
+a{
+  text-decoration: none;
+}
+h1{
+  text-align: center;
+  display: block;
+  margin: 2em auto;
+}
+
+
+/* concerne le form sur ajouter.ejs */
+
+/* label */
+label{
+  width: 11em;
+  text-align: center;
+}
+
+/* button */
+#btnSubmit{
+  display: block;
+  margin: 2em auto;
+  transition: all 0.9s;
+}
+#btnSubmit:hover{
+  transform: scale(1.09);
+}
+
+/* AFFICHAGE DES ARTICLES */
+
+/* CARDS */
+
+.articleCard{
+  text-align: center;
+  display: block;
+  margin: 1em auto;
+}
+.btnCard{
+  display: block;
+  margin: 1em auto;
+  max-width: 7em;
+  text-align: center;
+}
+button a{
+  color: white;
+  transition: all 0.9s;
+}
+button a:hover{
+  text-decoration: none;
+  color: white;
+  transform: scale(1.09);
+}
+
+/* BUTTON SUPPRIMER */
+#btnSubmitSupp{
+  display: block;
+  margin: 2em auto;
+  text-align: center;
+  transition: all 0.9s;
+}
+#btnSubmitSupp:hover{
+  transform: scale(1.09);
+}
