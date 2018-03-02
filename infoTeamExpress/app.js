@@ -44,7 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/article', article);
-//app.use('/commentaire', commentaire);
+app.use('/commentaire', commentaire);
 //app.use('/personne', personne);
 
 // catch 404 and forward to error handler

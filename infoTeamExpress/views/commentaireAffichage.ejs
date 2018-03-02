@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+</head>
+
+
+<% include header %>
+
+
+    <body>
+
+        <div>
+
+            <form action="/commentaire/creation" method="post">
+                <div class="input" id="crea">
+                    <label>votre Pseudo </label> :
+                    <input type="text" name="prenom" />
+                    <label>commentaire</label> :
+                    <input type="text" name="commentaire" required />
+                    <input type="submit" value="Envoyer" />
+                </div>
+
+            </form>
+
+            <ul>
+                <% for (let i = 0; i < tabN.length; i++) {%>
+                    <li class="list-group-item">Nom:
+                        <%= tabN[i] %>
+                            <br> message:
+                            <%= tabC[i] %>
+                                <form action="/commentaire/supplink/:<%= tabI[i]%>" method="post">
+                                    <button type="submit" class="btn btn-danger btn-sm">supprimer</button>
+                                    <button type="button" onclick="toggleForm(<%= i %>)" class="btn btn-primary btn-sm">Modifier</button>
+                                </form>
+
+                                <div id="edit_<%= i %>" style="display:none;">
+                                    <form action="/commentaire/modiflink/:<%= tabI[i]%>" method="post">
+
+                                        <input type="text" name="prenom" value="<%= tabN[i] %>" hidden />
+                                        <input type="text" name="commentaire" value="<%= tabC[i] %>" required/>
+                                        <button type="submit" class="btn btn-success btn-sm">modifier</button>
+                                    </form>
+                                </div>
+                    </li>
+
+                    </li>
+                    <% } %>
+
+            </ul>
+
+
+        </div>
+    </body>
+
+    <% include footer %>
+
+</html>
