@@ -2,8 +2,21 @@
 <html>
   <% include header %>
   <body>
+    <!-- TITRE -->
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+
+
+    <!-- CONECTTION/NON-CONNECTION -->
+    <% if (connected){%>
+      <p>Vous etes connectez!</p>
+      <p>idUser :
+        <%= idUser%>
+      </p>
+      <%}%>
+
+
+    <!-- LIENS  -->
     <a href="/article">article</a>
     <a href="/commentaire">commentaire</a>
     <a href="/personne">personne</a>

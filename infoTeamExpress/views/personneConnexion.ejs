@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<% include header %>
+
+    <body>
+        <h1>
+            <%= title %>
+        </h1>
+        <p>Welcome to
+            <%= title %>
+        </p>
+
+        <div>
+            <form action="/personne/connexionsubmit" method="POST">
+                <div class="form-group">
+                    Email:
+                    <input class="form-control" type="text" name="mailLoginForm" required/>
+                    <br>
+                </div>
+                <div class="form-group">
+                    Mot de passe:
+                    <input class="form-control" type="password" name="passwordForm" required/>
+                </div>
+                <button type="submit" class="btn btn-primary">Connexion</button>
+            </form>
+
+
+            <% if (userExist == false) {%>
+                <p>L'user n'existe pas</p>
+                <%}%>
+
+                    <a href="/personne/inscription">Inscrivez-vous</a>
+
+        </div>
+    </body>
+
+</html>
