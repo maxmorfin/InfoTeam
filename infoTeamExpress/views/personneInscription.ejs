@@ -3,67 +3,94 @@
 <% include header %>
 
     <body>
-        <h1>
-            <%= title %>
-        </h1>
-        <p>Welcome to
-            <%= title %>
-        </p>
 
-        <div>
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="/">
+                <img src="/images/logoBook.svg" width="30" height="30" alt="">
+            </a>
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Acceuil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="../personne/inscription">Inscription</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../personne/connexion">Connexion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../personne/deconnexion">Déconnexion</a>
+                </li>
+            </ul>
+        </nav>
 
-            <%  if (inscriptionsuccess) { %>
-                <h2>Inscription validee avec succes</h2>
-                <% } else { %>
-                    <% if (errors) { %>
-                        <ul>
-                            <%  for (let i in errors) { %>
-                                <li>
-                                    <%=  errors[i].param %> :
-                                        <%=  errors[i].msg %>
-                                </li>
-                                <% } %>
-                        </ul>
-                        <% }  %>
-                            <form action="/personne/inscription" method="POST">
-                                <div class="form-group">
-                                    Nom:
-                                    <input class="form-control" type="text" name="nomForm" required/>
-                                </div>
-                                <div class="form-group">
-                                    Prenom:
-                                    <input class="form-control" type="text" name="prenomForm" required/>
-                                </div>
-                                <div class="form-group">
-                                    Mail:
-                                    <input class="form-control" type="text" id="mailForm" name="mailForm" required/>
-                                </div>
-                                <div class="form-group">
-                                    Mot de passe:
-                                    <input class="form-control" type="password" id="mdpForm" name="mdpForm" required/>
-                                </div>
-                                <div class="form-group">
-                                    Retaper le même mot de passe:
-                                    <input class="form-control" type="password" name="mdpFormBis" required/>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Inscription</button>
-                            </form>
+        <!-- inscripttion -->
+
+        <div class="container">
+            <h1>
+                <%= title %>
+            </h1>
+            <p>Welcome to
+                <%= title %>
+            </p>
+            
+            <div>
+            
+                <%  if (inscriptionsuccess) { %>
+                    <h2>Inscription validee avec succes</h2>
+                    <% } else { %>
+                        <% if (errors) { %>
+                            <ul>
+                                <%  for (let i in errors) { %>
+                                    <li>
+                                        <%=  errors[i].param %> :
+                                            <%=  errors[i].msg %>
+                                    </li>
+                                    <% } %>
+                            </ul>
+                            <% }  %>
+                                <form action="/personne/inscription" method="POST">
+                                    <div class="form-group">
+                                        Nom:
+                                        <input class="form-control" type="text" name="nomForm" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        Prenom:
+                                        <input class="form-control" type="text" name="prenomForm" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        Mail:
+                                        <input class="form-control" type="text" id="mailForm" name="mailForm" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        Mot de passe:
+                                        <input class="form-control" type="password" id="mdpForm" name="mdpForm" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        Retaper le même mot de passe:
+                                        <input class="form-control" type="password" name="mdpFormBis" required/>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Inscription</button>
+                                </form>
+            </div>
+            <% } %>
+            
+                <% if(mailexist==1){ %>
+                    <div>
+                        <p>Ce mail existe déjà sur infoTeam</p>
+                    </div>
+                    <% } %>
+            
+                        <% if(inscriptionsucess==1){ %>
+                            <div>
+                                <p>Inscription réussie, vous pouvez vous connecter</p>
+                            </div>
+                            <% } %>
+                            <button class="btn btn-primary"><a href="/personne/connexion">connexion</a></button>
+                            
         </div>
-        <% } %>
-
-            <% if(mailexist==1){ %>
-                <div>
-                    <p>Ce mail existe déjà sur infoTeam</p>
-                </div>
-                <% } %>
-
-                    <% if(inscriptionsucess==1){ %>
-                        <div>
-                            <p>Inscription réussie, vous pouvez vous connecter</p>
-                        </div>
-                        <% } %>
-
-                            <a href="/personne/connexion">Retour à la connexion</a>
+       
 
     </body>
 

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include header %>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+            <img src="/images/logoBook.svg" width="30" height="30" alt="">
+        </a>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" href="/">Acceuil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="../personne/inscription">Inscrption</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../personne/connexion">Connexion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../personne/deconnexion">Déconnexion</a>
+            </li>
+        </ul>
+    </nav>
+    
+    <!-- SIDE BAR -->
+    <nav class="nav nav-pills nav-justified">
+        <a class="nav-item nav-link" href="/">Derniere news</a>
+        <a class="nav-item nav-link" href="../article/sport">Sport</a>
+        <a class="nav-item nav-link" href="../article/economie">Economie</a>
+        <a class="nav-item nav-link" href="../article/voyage">Voyage</a>
+    </nav>
+
+    <!-- Article -->
+    <h1>Economie</h1>
+    <section class="container">
+        <div class="row">
+            <% for (let i = 0; i < tabN.length; i++) {%>
+                <div class="col-md-12">
+                    <div class="card border-primary mb-12 articleCard" style="max-width: 60rem;">
+                        <div class="card-header">
+                            <%= tabTag[i] %>
+                        </div>
+                        <div class="card-body text-primary">
+                            <h5 class="card-title">
+                                <%= tabT[i] %>
+                            </h5>
+                            <p class="card-text">
+                                <%= tabC[i] %>
+                            </p>
+                        </div>
+                        <div class="card-header">
+                            <%= tabA[i] %>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+        </div>
+    
+    
+    </section>
+</body>
+</html>

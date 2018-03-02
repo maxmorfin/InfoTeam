@@ -8,7 +8,16 @@ a{
 h1{
   text-align: center;
   display: block;
-  margin: 2em auto;
+  margin: 1em auto;
+}
+
+
+/* side bar */
+.sidebar{
+  margin: 4em auto;
+}
+.nav-link{
+  margin: 1em auto;
 }
 
 
@@ -21,12 +30,15 @@ label{
 }
 
 /* button */
-#btnSubmit{
+.btn{
   display: block;
   margin: 2em auto;
   transition: all 0.9s;
+  width: 8em;
+  height: 3em;
+  text-align: auto;
 }
-#btnSubmit:hover{
+.btn:hover{
   transform: scale(1.09);
 }
 

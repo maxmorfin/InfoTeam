@@ -143,6 +143,102 @@ router.get('/suppression/:id', function (req, res, next) {
         });
     });
 });
+router.get('/economie', function (req, res, next) {
+    let numArticle = [];
+    let titre = [];
+    let auteurArticle = [];
+    let tag = [];
+    let datePublication = [];
+    let etat = [];
+    let nbVue = [];
+    let contenuArticle = [];
+
+    req.getConnection(function (err, connection) {
+        connection.query("Select * from Article where tag = 'economie'", function (err, result) {
+            if (err) {
+                throw err;
+            } else {
+                for (let i = 0; i < result.length; i++) {
+                    numArticle[i] = result[i].numArticle;
+                    titre[i] = result[i].titre;
+                    auteurArticle[i] = result[i].auteurArticle;
+                    tag[i] = result[i].tag;
+                    datePublication[i] = result[i].datePublication;
+                    etat[i] = result[i].etat;
+                    nbVue[i] = result[i].nbVue;
+                    contenuArticle[i] = result[i].contenuArticle;
+                }
+                res.render('tagEconomie', {
+                    title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle
+                });
+            };
+        });
+    });
+});
+router.get('/voyage', function (req, res, next) {
+    let numArticle = [];
+    let titre = [];
+    let auteurArticle = [];
+    let tag = [];
+    let datePublication = [];
+    let etat = [];
+    let nbVue = [];
+    let contenuArticle = [];
+
+    req.getConnection(function (err, connection) {
+        connection.query("Select * from Article where tag = 'voyage'", function (err, result) {
+            if (err) {
+                throw err;
+            } else {
+                for (let i = 0; i < result.length; i++) {
+                    numArticle[i] = result[i].numArticle;
+                    titre[i] = result[i].titre;
+                    auteurArticle[i] = result[i].auteurArticle;
+                    tag[i] = result[i].tag;
+                    datePublication[i] = result[i].datePublication;
+                    etat[i] = result[i].etat;
+                    nbVue[i] = result[i].nbVue;
+                    contenuArticle[i] = result[i].contenuArticle;
+                }
+                res.render('tagVoyage', {
+                    title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle
+                });
+            };
+        });
+    });
+});
+router.get('/sport', function (req, res, next) {
+    let numArticle = [];
+    let titre = [];
+    let auteurArticle = [];
+    let tag = [];
+    let datePublication = [];
+    let etat = [];
+    let nbVue = [];
+    let contenuArticle = [];
+
+    req.getConnection(function (err, connection) {
+        connection.query("Select * from Article where tag = 'sport'", function (err, result) {
+            if (err) {
+                throw err;
+            } else {
+                for (let i = 0; i < result.length; i++) {
+                    numArticle[i] = result[i].numArticle;
+                    titre[i] = result[i].titre;
+                    auteurArticle[i] = result[i].auteurArticle;
+                    tag[i] = result[i].tag;
+                    datePublication[i] = result[i].datePublication;
+                    etat[i] = result[i].etat;
+                    nbVue[i] = result[i].nbVue;
+                    contenuArticle[i] = result[i].contenuArticle;
+                }
+                res.render('tagSport', {
+                    title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle
+                });
+            };
+        });
+    });
+});
 
 //POST
 router.post('/ajouter', (req,res) => {

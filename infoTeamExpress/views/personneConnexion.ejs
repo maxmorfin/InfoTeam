@@ -3,6 +3,29 @@
 <% include header %>
 
     <body>
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="/">
+                <img src="/images/logoBook.svg" width="30" height="30" alt="">
+            </a>
+            
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Acceuil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="../personne/inscription">Inscription</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../personne/connexion">Connexion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../personne/deconnexion">Déconnexion</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- connexion -->
         <h1>
             <%= title %>
         </h1>
@@ -28,8 +51,10 @@
             <% if (userExist == false) {%>
                 <p>L'user n'existe pas</p>
                 <%}%>
-
-                    <a href="/personne/inscription">Inscrivez-vous</a>
+                <button class="btn btn-success">
+                    <a href="/personne/inscription">Inscription</a>
+                </button>
+                
 
         </div>
     </body>
