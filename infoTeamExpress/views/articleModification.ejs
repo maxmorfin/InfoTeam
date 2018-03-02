@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<% include header %>
+
+    <body>
+
+        <!-- NAVIGATION -->
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="/">
+                <img src="/images/logoBook.svg" width="30" height="30" alt="">
+            </a>
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/article/ajouter">Ajouter un article</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/article/modifier">Modifier/Supprimer un article</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/article/afficher">Lire les articles</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- TITRE -->
+        <h1>Modifier votre Article !</h1>
+
+        <!-- INPUT -->
+        <% for (let i = 0; i < tabN.length; i++) {%>
+        <section class="container">
+            <form action="/article/modification/:<%= tabN[i]%>" method="POST">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="titre">Modifier votre Titre</label>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Titre" aria-describedby="inputGroup-sizing-sm" name="titre" id="titre" value="<%= tabT[i] %>">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="tag">Modifiez votre Tag</label>
+                    </div>
+                    <select class="custom-select" name="tag" id="tag">
+                        <option value="sport">Sport</option>
+                        <option value="economie">Economie</option>
+                        <option value="voyage">Voyage</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="contenuArticle">Modifiez votre Article</label>
+                    </div>
+                    <textarea class="form-control" aria-label="contenuArticle" name="contenuArticle" id="contenuArticle" rows="10"><%= tabC[i] %></textarea>
+                </div>
+                <button type="submit" class="btn btn-success" id="btnSubmit">Modifier Votre Article</button>
+            </form>
+        </section>
+        <% } %>
+    </body>
+
+</html>

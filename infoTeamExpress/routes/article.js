@@ -3,11 +3,11 @@ var router = express.Router();
 
 
 //GET
-router.get('/', function(req,res,next){
+router.get('/', function (req, res, next) {
     res.render('article')
 });
 router.get('/ajouter', function(req,res,next){
-    res.render('ajouter')
+    res.render('articleAjouter')
 });
 router.get('/afficher', function(req,res,next){
     let numArticle = [];
@@ -34,7 +34,7 @@ router.get('/afficher', function(req,res,next){
                     nbVue[i] = result[i].nbVue;
                     contenuArticle[i] = result[i].contenuArticle;
                 }
-                res.render('afficher', {
+                res.render('articleAfficher', {
                     title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle
                 });
             };
@@ -66,7 +66,7 @@ router.get('/modifier', function (req, res, next) {
                     nbVue[i] = result[i].nbVue;
                     contenuArticle[i] = result[i].contenuArticle;
                 }
-                res.render('modifier', {
+                res.render('articleModifier', {
                     title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle
                 });
             };
@@ -101,7 +101,7 @@ router.get('/modification/:id', function (req, res, next) {
                     nbVue[i] = result[i].nbVue;
                     contenuArticle[i] = result[i].contenuArticle;
                 }
-                res.render('modification', {
+                res.render('articleModification', {
                     title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle
                 });
             };
@@ -136,7 +136,7 @@ router.get('/suppression/:id', function (req, res, next) {
                     nbVue[i] = result[i].nbVue;
                     contenuArticle[i] = result[i].contenuArticle;
                 }
-                res.render('suppression', {
+                res.render('articleSupprimer', {
                     title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle
                 });
             };
@@ -157,7 +157,7 @@ router.post('/ajouter', (req,res) => {
         if (err) throw err;
         console.log('insertion reussit');
     })
-    res.render('ajouter')
+    res.render('articleAjouter')
 });
 });
 router.post('/modification/:id', (req,res) => {

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<% include header %>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+            <img src="/images/logoBook.svg" width="30" height="30" alt="">
+        </a>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" href="../article/ajouter">Ajouter un article</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../article/modifier">Modifier/Supprimer un article</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../article/afficher">Lire les articles</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- TITRE -->
+    <h1>Modifiez ou Supprimez vos article</h1>
+
+    <section class="container">
+        <div class="row">
+            <% for (let i = 0; i < tabN.length; i++) {%>
+                <div class="col-md-4">
+                    <div class="card border-primary mb-3 articleCard" style="max-width: 18rem; max-height: 22rem;">
+                        <div class="card-header">
+                            <%= tabTag[i] %>
+                        </div>
+                        <div class="card-body text-primary">
+                            <h5 class="card-title">
+                                <%= tabT[i] %>
+                            </h5>
+                            <p class="card-text">
+                                <%= tabC[i] %>
+                            </p>
+                        </div>
+                        <div class="card-header">
+                            <%= tabA[i] %>
+                        </div>
+                        <div class="row">
+                            <form action="/article/modification/:<%= tabN[i]%>" method="GET" class="col-md-6">
+                            <button type="submit" class="btn btn-success col-md-6 btnCard">
+                                Modifier
+                            </button>
+                            </form>
+                            <form action="/article/suppression/:<%= tabN[i]%>" method="GET" class="col-md-6">
+                                <button type="submit" class="btn btn-danger col-md-6 btnCard">
+                                    Supprimer
+                                </button>
+                            </form>
+                            
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <% } %>
+        </div>
+    
+    
+    </section>
+</body>
+</html>

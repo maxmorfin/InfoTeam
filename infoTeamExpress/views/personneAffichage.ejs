@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<% include header %>
+
+    <body>
+        <h1>
+            <%= title %>
+        </h1>
+        <p>Welcome to
+            <%= title %>
+        </p>
+
+        <div>
+            <lu class="list-group">
+                <% for (let i = 0; i < tabN.length; i++) {%>
+                    <li class="list-group-item">Nom:
+                        <%= tabN[i] %> Prenom:
+                            <%= tabP[i] %>, mail:
+                                <%= tabMa[i]%>
+                    </li>
+                    <% } %>
+            </lu>
+        </div>
+    </body>
+
+</html>

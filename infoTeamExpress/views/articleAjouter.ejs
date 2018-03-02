@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- BOOTSTRAP + CSS CONTENU DANS HEADER -->
+<% include header %>
+
+<!-- formulaire de création d'article
+       
+        -doit contenir :
+        -un titre
+        -un tag
+        -un textarea
+-->
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+            <img src="/images/logoBook.svg" width="30" height="30" alt="">
+        </a>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" href="../article/ajouter">Ajouter un article</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../article/modifier">Modifier/Supprimer un article</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../article/afficher">Lire les articles</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- TITRE -->
+    <h1>Informez Nous !</h1>
+
+
+    <!-- FORMULAIRE -->
+    <section class="container">
+        <form action="/article/ajouter" method="POST">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="titre">Choisissez un Titre</label>
+                </div>
+                <input type="text" class="form-control" aria-label="Titre" aria-describedby="inputGroup-sizing-sm" name="titre" id="titre">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="tag">Choisissez un Tag</label>
+                </div>
+                <select class="custom-select" name="tag" id="tag">
+                    <option value="sport">Sport</option>
+                    <option value="economie">Economie</option>
+                    <option value="voyage">Voyage</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="contenuArticle">Ecrivez ici votre article</label>
+                </div>
+                <textarea class="form-control" aria-label="contenuArticle" name="contenuArticle" id="contenuArticle" rows="10"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" id="btnSubmit">Publier Votre Article</button>
+        </form>
+    </section>
+    
+    <!-- SCRIPT JS CONTENU DANS FOOTER -->
+    <% include footer %>
+</body>
+</html>
