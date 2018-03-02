@@ -173,7 +173,7 @@ router.post('/modification/:id', (req,res) => {
             if (err) throw err;
             console.log('modification reussit'); 
         });
-        res.redirect('afficher');
+        res.redirect('/article/afficher');
     });
 });
 router.post('/suppression/:id', (req,res)=>{
@@ -189,7 +189,7 @@ router.post('/suppression/:id', (req,res)=>{
             if (err) throw err;
             console.log('suppression effectuer');
         });
-        res.redirect('/article/ afficher');
+        res.redirect('/article/afficher');
     });
 });
 
