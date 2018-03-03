@@ -1,0 +1,44 @@
+
+    <% if (connected){ %>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="/">
+            <img src="/images/logoBook.svg" width="30" height="30" alt="">
+            </a>
+            <h2>Bonjour <%= nomUser%> <%= prenomUser %></h2>
+            <ul class="nav justify-content-center">
+                <%if (typeUser == 'journaliste'){ %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/article/ajouter">Poster un Article</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/article/modifier">Modifier un Article</a>
+                    </li>
+                <% } %>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Accueil</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/personne/deconnexion">Déconnexion</a>
+                </li>  
+            </ul>
+        </nav>
+    <% }else {%>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="/">
+                <img src="/images/logoBook.svg" width="30" height="30" alt="">
+            </a>
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/personne/inscription">Inscription</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/personne/connexion">Connexion</a>
+                </li>
+            </ul>
+        </nav>
+    <% } %> 
+</body>
+</html>

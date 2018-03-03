@@ -1,51 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <% include header %>
-  <body>
+<% include header %>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand" href="/">
-        <img src="/images/logoBook.svg" width="30" height="30" alt="">
-      </a>
-      <ul class="nav justify-content-center">
-        <li class="nav-item">
-          <a class="nav-link active" href="/">Acceuil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="personne/inscription">Inscription</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="personne/connexion">Connexion</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="personne/deconnexion">Déconnexion</a>
-        </li>
-      </ul>
-    </nav>
+    <body>
 
-    <!-- TAG NAV BAR -->
-      <nav class="nav nav-pills nav-justified">
-        <a class="nav-item nav-link" href="/">Derniere news</a>
-        <a class="nav-item nav-link" href="article/sport">Sport</a>
-        <a class="nav-item nav-link" href="article/economie">Economie</a>
-        <a class="nav-item nav-link" href="article/voyage">Voyage</a>
-      </nav>
-     
-      <!-- TITRE -->
-      <h1>InfoTeam</h1>
-      
-      <% include articleAfficher %>
-      
-      
-      
-        <!-- CONECTTION/NON-CONNECTION -->
-        <% if (connected){%>
-          <p>Vous etes connectez!</p>
-          <p>idUser :
-            <%= idUser%>
-          </p>
-          <%}%>
-  <% include footer %>
-  </body>
+        <!-- NAVBAR -->
+
+        <% include navbar%>
+
+        <!-- TAG NAV BAR -->
+        <nav class="nav nav-pills nav-justified" id="pop">
+            <a class="nav-item nav-link" href="/">Derniere news</a>
+            <a class="nav-item nav-link" href="/article/sport">Sport</a>
+            <a class="nav-item nav-link" href="/article/economie">Economie</a>
+            <a class="nav-item nav-link" href="/article/voyage">Voyage</a>
+        </nav>
+
+        <!-- TITRE -->
+        <h1>InfoTeam</h1>
+
+        <% include articleAfficher %>
+
+
+
+            <!-- CONECTTION/NON-CONNECTION -->
+            <% if (connected){%>
+                <p>Vous etes connectez!</p>
+                <p>idUser :
+                    <%= idUser%>
+                </p>
+                <%}%>
+                    <% include footer %>
+    </body>
+
 </html>

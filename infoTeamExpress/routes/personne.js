@@ -48,7 +48,7 @@ router.get('/inscription', function (req, res, next) {
 
     res.render('personneInscription', {
         title: 'Page d\'inscription', mailexist: 0, inscriptionsucess: 0, inscriptionsuccess: req.session.inscriptionsuccess,
-        errors: req.session.errors
+        errors: req.session.errors, connected : req.session.connected
     });
 
 });
@@ -65,8 +65,7 @@ router.post('/inscription', function (req, res, next) {
         req.session.errors = errors;
         req.session.inscriptionsuccess = false;
         res.render('personneInscription', {
-            title: 'Page d\'inscription', mailexist: 0, inscriptionsucess: 0, inscriptionsuccess: req.session.inscriptionsuccess,
-            errors: req.session.errors
+            title: 'Page d\'inscription', mailexist: 0, inscriptionsucess: 0, inscriptionsuccess: req.session.inscriptionsuccess, errors: req.session.errors, connected : req.session.connected
         });
     } else {
 
@@ -108,7 +107,7 @@ router.post('/inscription', function (req, res, next) {
                                 //res.redirect("/");
                                 req.session.inscriptionsuccess = true;
                                 res.render('personneInscription', {
-                                    title: 'Page d\'inscription', mailexist: 0, inscriptionsucess: 1, inscriptionsuccess: req.session.inscriptionsuccess, errors: req.session.errors
+                                    title: 'Page d\'inscription', mailexist: 0, inscriptionsucess: 1, inscriptionsuccess: req.session.inscriptionsuccess, errors: req.session.errors, connected : req.session.connected
                                 });
                             }
 
@@ -120,7 +119,7 @@ router.post('/inscription', function (req, res, next) {
 
                     //res.redirect('/personne/inscription');
                     res.render('personneInscription', {
-                        title: 'Page d\'inscription', mailexist: 1, inscriptionsucess: 0
+                        title: 'Page d\'inscription', mailexist: 1, inscriptionsucess: 0, inscriptionsuccess: req.session.inscriptionsuccess, errors: req.session.errors, connected: req.session.connected
                     });
                 }
 
@@ -144,7 +143,7 @@ router.get('/modification', function (req, res, next) {
             } else {
                 console.log(rows);
                 res.render('personneModification', {
-                    title: 'Page de gestion de compte', mailexist: 0, modifok: 0, n: rows[0].nom, p: rows[0].prenom, m: rows[0].mail
+                    title: 'Page de gestion de compte', mailexist: 0, modifok: 0, n: rows[0].nom, p: rows[0].prenom, m: rows[0].mail, connected : req.session.connected
                 });
             }
 
@@ -242,7 +241,7 @@ router.post('/modification', function (req, res, next) {
 router.get('/modifmdp', function (req, res, next) {
 
     res.render('personneModifMdp', {
-        title: 'Page de modification de mot de passe'
+        title: 'Page de modification de mot de passe', connected : req.session.connected
     });
 
 });
@@ -257,7 +256,7 @@ router.get('/connexion', function (req, res, next) {
 
     res.render('personneConnexion', {
         title: 'Page de connexion', inscriptionsuccess: req.session.inscriptionsuccess,
-        errors: req.session.errors, userExist: req.session.userExist
+        errors: req.session.errors, userExist: req.session.userExist, connected: req.session.connected
     });
 
 });
@@ -265,28 +264,7 @@ router.get('/connexion', function (req, res, next) {
 router.post('/connexionsubmit', function (req, res, next) {
 
     req.getConnection(function (error, conn) {
-        /*
-        conn.query('select mail, mdp from personne', function (err, rows) {
-            if (err) {
-                throw err;
-            } else {
-                req.session.userExist = false;
-                console.log(rows);
-                for (let i = 0; i < rows.length; i++) {
-                    if (rows[i].mail == req.body.mailLoginForm && rows[i].mdp == req.body.passwordForm) {
-                        req.session.userExist = true;
-                        req.session.connected = true;
-                    }
-                }
-                console.log(req.session.userExist);
-                res.render('index', {
-                    title: 'Accueil', connected: req.session.connected, errors: req.session.errors //variable pour la connexion reussie
-                  });
-            }
-        });
-        */
-
-        conn.query('select id from personne where mail =? and mdp=sha1(?)', [req.body.mailLoginForm, req.body.passwordForm], function (err, rows) {
+        conn.query('select id, type, nom, prenom from personne where mail = ? and mdp=sha1(?)', [req.body.mailLoginForm, req.body.passwordForm], function (err, rows) {
             if (err) {
                 throw err;
             } else {
@@ -296,6 +274,11 @@ router.post('/connexionsubmit', function (req, res, next) {
                     req.session.userExist = true;
                     req.session.connected = true;
                     req.session.idUser = rows[0].id;
+                    req.session.typeUser = rows[0].type;
+                    req.session.nomUser = rows[0].nom;
+                    req.session.prenomUser = rows[0].prenom;
+                    console.log(req.session.typeUser);
+                    
 
                     conn.query('select type from personne where id=?', req.session.idUser, function (err, resultype) {
                         if (err) {
@@ -303,10 +286,11 @@ router.post('/connexionsubmit', function (req, res, next) {
                         } else {
                             console.log(resultype);
                             req.session.type = resultype[0].type;
-                            res.render('index', {
-                                title: 'Accueil', connected: req.session.connected, errors: req.session.errors, //variable pour la connexion reussie
-                                userExist: req.session.userExist, idUser: req.session.idUser, typeUser: req.session.typeUser
-                            });
+                            // res.render('index', {
+                            //     title: 'Accueil', connected: req.session.connected, errors: req.session.errors, //variable pour la connexion reussie
+                            //     userExist: req.session.userExist, idUser: req.session.idUser, typeUser: req.session.typeUser
+                            // });
+                            res.redirect('/');
                         }
                     });
 

@@ -4,10 +4,10 @@ var router = express.Router();
 
 //GET
 router.get('/', function (req, res, next) {
-    res.render('article')
+    res.render('article', { connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser})
 });
 router.get('/ajouter', function(req,res,next){
-    res.render('articleAjouter')
+    res.render('articleAjouter', { connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser })
 });
 router.get('/afficher', function(req,res,next){
     let numArticle = [];
@@ -35,7 +35,7 @@ router.get('/afficher', function(req,res,next){
                     contenuArticle[i] = result[i].contenuArticle;
                 }
                 res.render('articleAfficher', {
-                    title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle
+                    title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
                 });
             };
         });
@@ -44,7 +44,7 @@ router.get('/afficher', function(req,res,next){
 router.get('/modifier', function (req, res, next) {
     let numArticle = [];
     let titre = [];
-    let auteurArticle = [];
+    let auteurArticle = [req.session.nomUser];
     let tag = [];
     let datePublication = [];
     let etat = [];
@@ -52,7 +52,7 @@ router.get('/modifier', function (req, res, next) {
     let contenuArticle = [];
 
     req.getConnection(function (err, connection) {
-        connection.query("Select * from Article where auteurArticle = 'morfin'", function (err, result) {
+        connection.query("Select * from Article where auteurArticle = ?",auteurArticle, function (err, result) {
             if (err) {
                 throw err;
             } else {
@@ -67,7 +67,7 @@ router.get('/modifier', function (req, res, next) {
                     contenuArticle[i] = result[i].contenuArticle;
                 }
                 res.render('articleModifier', {
-                    title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle
+                    title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
                 });
             };
         });
@@ -79,7 +79,7 @@ router.get('/modification/:id', function (req, res, next) {
     
     let numArticle = [];
     let titre = [];
-    let auteurArticle = [];
+    let auteurArticle = [req.session.nomUser];
     let tag = [];
     let datePublication = [];
     let etat = [];
@@ -87,7 +87,7 @@ router.get('/modification/:id', function (req, res, next) {
     let contenuArticle = [];
 
     req.getConnection(function (err, connection) {
-        connection.query("Select * from Article where auteurArticle = 'morfin' and numArticle = ? ",[idArticle.substr(1)], function (err, result) {
+        connection.query("Select * from Article where auteurArticle = ? and numArticle = ? ",[auteurArticle, idArticle.substr(1)], function (err, result) {
             if (err) {
                 throw err;
             } else {
@@ -102,7 +102,7 @@ router.get('/modification/:id', function (req, res, next) {
                     contenuArticle[i] = result[i].contenuArticle;
                 }
                 res.render('articleModification', {
-                    title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle
+                    title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
                 });
             };
         });
@@ -114,7 +114,7 @@ router.get('/suppression/:id', function (req, res, next) {
 
     let numArticle = [];
     let titre = [];
-    let auteurArticle = [];
+    let auteurArticle = [req.session.nomUser];
     let tag = [];
     let datePublication = [];
     let etat = [];
@@ -122,7 +122,7 @@ router.get('/suppression/:id', function (req, res, next) {
     let contenuArticle = [];
 
     req.getConnection(function (err, connection) {
-        connection.query("Select * from Article where auteurArticle = 'morfin' and numArticle = ? ", [idArticle.substr(1)], function (err, result) {
+        connection.query("Select * from Article where auteurArticle = ? and numArticle = ? ", [auteurArticle, idArticle.substr(1)], function (err, result) {
             if (err) {
                 throw err;
             } else {
@@ -137,7 +137,7 @@ router.get('/suppression/:id', function (req, res, next) {
                     contenuArticle[i] = result[i].contenuArticle;
                 }
                 res.render('articleSupprimer', {
-                    title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle
+                    title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
                 });
             };
         });
@@ -169,7 +169,7 @@ router.get('/economie', function (req, res, next) {
                     contenuArticle[i] = result[i].contenuArticle;
                 }
                 res.render('tagEconomie', {
-                    title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle
+                    title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
                 });
             };
         });
@@ -201,7 +201,7 @@ router.get('/voyage', function (req, res, next) {
                     contenuArticle[i] = result[i].contenuArticle;
                 }
                 res.render('tagVoyage', {
-                    title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle
+                    title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
                 });
             };
         });
@@ -233,7 +233,7 @@ router.get('/sport', function (req, res, next) {
                     contenuArticle[i] = result[i].contenuArticle;
                 }
                 res.render('tagSport', {
-                    title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle
+                    title: 'affichage des articles', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
                 });
             };
         });
@@ -244,7 +244,7 @@ router.get('/sport', function (req, res, next) {
 router.post('/ajouter', (req,res) => {
     var data = {
         titre : req.body.titre,
-        auteurArticle : 'morfin',
+        auteurArticle : req.session.nomUser,
         tag : req.body.tag,
         contenuArticle : req.body.contenuArticle
     };
@@ -253,14 +253,16 @@ router.post('/ajouter', (req,res) => {
         if (err) throw err;
         console.log('insertion reussit');
     })
-    res.render('articleAjouter')
+    res.render('articleAjouter', {
+        connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
+    });
 });
 });
 router.post('/modification/:id', (req,res) => {
     let idArticle = req.params.id;
     let data = {
         titre : req.body.titre,
-        auteurArticle : 'morfin',
+        auteurArticle : req.session.nomUser,
         tag : req.body.tag,
         contenuArticle : req.body.contenuArticle
     };
@@ -269,14 +271,14 @@ router.post('/modification/:id', (req,res) => {
             if (err) throw err;
             console.log('modification reussit'); 
         });
-        res.redirect('/article/afficher');
+        res.redirect('/article/modifier');
     });
 });
 router.post('/suppression/:id', (req,res)=>{
     let idArticle = req.params.id;
     let data = {
         titre : req.body.titre,
-        auteurArticle : 'morfin',
+        auteurArticle : req.session.nomUser,
         tag : req.body.tag,
         contenuArticle : req.body.contenuArticle
     };
@@ -285,7 +287,7 @@ router.post('/suppression/:id', (req,res)=>{
             if (err) throw err;
             console.log('suppression effectuer');
         });
-        res.redirect('/article/afficher');
+        res.redirect('/article/modifier');
     });
 });
 
