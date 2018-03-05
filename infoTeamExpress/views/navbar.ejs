@@ -1,10 +1,19 @@
 
     <% if (connected){ %>
         <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" id="lienNavBar" href="/">
             <img src="/images/logoBook.svg" width="30" height="30" alt="">
+            <h4 id="titreNavBar">InfoTeam</h4>
+            <p id="nomConnexion">
+                <span id="prenomUserNavBar">
+                    <%= prenomUser %>
+                </span>
+                <span id="nomUserNavBar">
+                    <%= nomUser%>
+                </span>
+            </p>
             </a>
-            <h2>Bonjour <%= nomUser%> <%= prenomUser %></h2>
+            
             <ul class="nav justify-content-center">
                 <%if (typeUser == 'journaliste'){ %>
                     <li class="nav-item">
@@ -24,8 +33,9 @@
         </nav>
     <% }else {%>
         <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" id="lienNavBar" href="/">
                 <img src="/images/logoBook.svg" width="30" height="30" alt="">
+                <h4 id="titreNavBar">InfoTeam</h4>
             </a>
             <ul class="nav justify-content-center">
                 <li class="nav-item">

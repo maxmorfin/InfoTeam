@@ -70,10 +70,10 @@ router.post('/inscription', function (req, res, next) {
     } else {
 
         var data = {
-            nom: '"' + req.body.nomForm + '"',
-            prenom: '"' + req.body.prenomForm + '"',
-            mail: '"' + req.body.mailForm + '"',
-            mdp: '"' + req.body.mdpForm + '"'
+            nom: req.body.nomForm,
+            prenom: req.body.prenomForm,
+            mail: req.body.mailForm,
+            mdp: req.body.mdpForm
         };
 
         //mot de passe d'alfred : mdpwayne
@@ -98,7 +98,7 @@ router.post('/inscription', function (req, res, next) {
 
                     req.getConnection(function (error, conn) {
                         //conn.query('insert into personne set ?', data, function (err, rows) {
-                        conn.query('insert into personne (nom, prenom, mail, mdp) values (' + data.nom + ', ' + data.prenom + ', ' + data.mail + ', SHA1(' + data.mdp + '))', function (err, rows) {
+                        conn.query('insert into personne (nom, prenom, mail, mdp) values (?,?,?, SHA1(?))',[data.nom,data.prenom,data.mail,data.mdp], function (err, rows) {
                             if (err) {
                                 throw err;
                             } else {
@@ -143,7 +143,7 @@ router.get('/modification', function (req, res, next) {
             } else {
                 console.log(rows);
                 res.render('personneModification', {
-                    title: 'Page de gestion de compte', mailexist: 0, modifok: 0, n: rows[0].nom, p: rows[0].prenom, m: rows[0].mail, connected : req.session.connected
+                    title: 'Page de gestion de compte', mailexist: 0, modifok: 0, n: rows[0].nom, p: rows[0].prenom, m: rows[0].mail, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
                 });
             }
 
@@ -163,9 +163,9 @@ router.post('/modification', function (req, res, next) {
     let num = 3;
 
     var data = {
-        nom: '"' + req.body.nomForm + '"',
-        prenom: '"' + req.body.prenomForm + '"',
-        mail: '"' + req.body.mailForm + '"'
+        nom: req.body.nomForm,
+        prenom: req.body.prenomForm,
+        mail: req.body.mailForm
     };
 
     let mailExistant = 0; // à 1 si on trouve deja le mail dans la bdd
@@ -189,7 +189,7 @@ router.post('/modification', function (req, res, next) {
                 //TO DO: requete à modifier, update
 
                 req.getConnection(function (error, conn) {
-                    conn.query('update personne set nom=' + data.nom + ', prenom=' + data.prenom + ', mail=' + data.mail + 'where id=' + num, function (err, rows) {
+                    conn.query('update personne set nom = ?, prenom = ? , mail = ?  where id = ? ', [data.nom, data.prenom, data.mail, num], function (err, rows) {
                         if (err) {
                             throw err;
                         } else {
@@ -203,7 +203,7 @@ router.post('/modification', function (req, res, next) {
                                     } else {
                                         console.log(rows);
                                         res.render('personneModification', {
-                                            title: 'Page de gestion de compte', mailexist: 0, modifok: 1, n: rows[0].nom, p: rows[0].prenom, m: rows[0].mail
+                                            title: 'Page de gestion de compte', mailexist: 0, modifok: 1, n: rows[0].nom, p: rows[0].prenom, m: rows[0].mail, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
                                         });
                                     }
 
@@ -220,7 +220,7 @@ router.post('/modification', function (req, res, next) {
 
                 //res.redirect('/personne/inscription');
                 res.render('personneModification', {
-                    title: 'Page de gestion de compte', mailexist: 1, modifok: 0, n: rows[0].nom, p: rows[0].prenom, m: rows[0].mail
+                    title: 'Page de gestion de compte', mailexist: 1, modifok: 0, n: rows[0].nom, p: rows[0].prenom, m: rows[0].mail, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
                 });
             }
 
@@ -241,8 +241,44 @@ router.post('/modification', function (req, res, next) {
 router.get('/modifmdp', function (req, res, next) {
 
     res.render('personneModifMdp', {
-        title: 'Page de modification de mot de passe', connected : req.session.connected
+        title: 'Page de modification de mot de passe', newMdpSuccess: 0, badOldMdp: 0, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
     });
+
+});
+router.post('/modifmdp', function (req, res, next) {
+    let num = req.session.idUser;
+    let mdpOld = req.body.mdpFormOld;
+    let newMdp = req.body.mdpFormNew;
+
+    req.getConnection(function (err, connexion) {
+        connexion.query("Select mdp from Personne where id = ? ", [num], function (err, result) {
+            if (err) {
+                throw err;
+            } else {
+
+                connexion.query('select sha1(?) as testsha', mdpOld, function (err, resultest) {
+                    if (err) {
+                        throw err;
+                    } else {
+                        console.log("mdp bdd:", result[0].mdp, "mdpold entré:", resultest[0].testsha);
+                        if (result[0].mdp == resultest[0].testsha) {
+                            connexion.query("Update Personne set mdp = sha1(?) where id = ? ", [newMdp, num], function (err, rows) {
+                                if (err) throw err;
+                                res.render('personneModifMdp', {
+                                    title: 'Page de modification de mot de passe', newMdpSuccess: 1, badOldMdp: 0, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
+                                });
+                            })
+                        } else {
+                            res.render('personneModifMdp', {
+                                title: 'Page de modification de mot de passe', newMdpSuccess: 0, badOldMdp: 1, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
+                            });
+                        }
+                    }
+                });
+
+            }
+        })
+    })
 
 });
 

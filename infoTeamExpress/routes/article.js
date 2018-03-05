@@ -7,7 +7,9 @@ router.get('/', function (req, res, next) {
     res.render('article', { connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser})
 });
 router.get('/ajouter', function(req,res,next){
-    res.render('articleAjouter', { connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser })
+    res.render('articleAjouter', { 
+        connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
+    })
 });
 router.get('/afficher', function(req,res,next){
     let numArticle = [];
@@ -249,7 +251,7 @@ router.post('/ajouter', (req,res) => {
         contenuArticle : req.body.contenuArticle
     };
     req.getConnection(function (err, connection) {
-    connection.query("Insert into article set ? ", data, function(err, rows) {
+        connection.query("Insert into article (titre, auteurArticle, tag, datePublication, contenuArticle) values (?,?,?,now(),?)", [data.titre, data.auteurArticle, data.tag, data.contenuArticle], function(err, rows) {
         if (err) throw err;
         console.log('insertion reussit');
     })
@@ -267,7 +269,7 @@ router.post('/modification/:id', (req,res) => {
         contenuArticle : req.body.contenuArticle
     };
     req.getConnection(function (err, connection){
-        connection.query("Update Article set ? where numArticle = ? ",[data, idArticle.substr(1)], function(err,rows){
+        connection.query("Update Article set titre=?, auteurArticle=?, tag=?, datePublication=now(), contenuArticle=? where numArticle = ? ", [data.titre, data.auteurArticle, data.tag, data.contenuArticle, idArticle.substr(1)], function(err,rows){
             if (err) throw err;
             console.log('modification reussit'); 
         });

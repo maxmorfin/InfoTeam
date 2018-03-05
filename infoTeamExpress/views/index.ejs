@@ -7,9 +7,10 @@
         <!-- NAVBAR -->
 
         <% include navbar%>
+        
 
         <!-- TAG NAV BAR -->
-        <nav class="nav nav-pills nav-justified" id="pop">
+        <nav class="nav nav-pills nav-justified">
             <a class="nav-item nav-link" href="/">Derniere news</a>
             <a class="nav-item nav-link" href="/article/sport">Sport</a>
             <a class="nav-item nav-link" href="/article/economie">Economie</a>
@@ -17,7 +18,7 @@
         </nav>
 
         <!-- TITRE -->
-        <h1>InfoTeam</h1>
+        <!-- <h1>InfoTeam</h1> -->
 
         <% include articleAfficher %>
 
@@ -25,10 +26,10 @@
 
             <!-- CONECTTION/NON-CONNECTION -->
             <% if (connected){%>
-                <p>Vous etes connectez!</p>
+                <!-- <p>Vous etes connectez!</p>
                 <p>idUser :
                     <%= idUser%>
-                </p>
+                </p> -->
                 <%}%>
                     <% include footer %>
     </body>

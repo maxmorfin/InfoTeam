@@ -1,23 +1,90 @@
+/* 
+
+font-family: 'Montserrat', sans-serif;
+font-family: 'Nanum Gothic', sans-serif;
+font-family: 'Plaster', cursive;
+font-family: 'Russo One', sans-serif;
+font-family: 'Krona One', sans-serif;
+
+*/
+
+
+
+
+
 /* GENERALE */
 body{
   transition: all 0.9s;
+  font-family: 'Nanum Gothic', sans-serif;
 }
 a{
   text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
 }
 h1{
+  color: #1B9AAA;
+  font-weight: bolder;
   text-align: center;
   display: block;
   margin: 1em auto;
 }
+h2{
+  color: #1B9AAA;
+  font-weight: bolder;
+  text-align: center;
+  display: block;
+  margin: 1em auto;
+}
+#nomUserNavBar{
+  text-transform: uppercase;
+}
+#prenomUserNavBar{
+  text-transform: capitalize;
+}
+#nomConnexion{
+  display: inline-block;
+  text-align: center;
+  margin: 0 auto;
+}
+p{
+  color: #DDDBCB;
+  font-family: 'Nanum Gothic', sans-serif;
+  text-align: center;
+  font-weight: bolder;
+}
 
+/* BAR DE NAVIGATION */
 
-/* side bar */
+a #lienNavBar{
+  display: inline-block;
+  margin: 0 auto;  
+}
+
+nav #titreNavBar{
+  display: inline-block;
+  margin: 0 auto;
+  font-family: 'Krona One', sans-serif;
+  color: #1B9AAA;
+}
+
+/* navbar tag */
+
 .sidebar{
   margin: 4em auto;
 }
 .nav-link{
-  margin: 1em auto;
+  margin: 1em 1em;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+  border: 1px solid #e3f2fd;
+  border-radius: 2em;
+  color: #1B9AAA;
+  transition: all 0.9s;
+}
+.nav-link:hover{
+  color: #1B9AAA;
+  transform: scale(1.09);
+  background: rgba(27, 154, 170, 0.2)
 }
 
 
@@ -26,7 +93,10 @@ h1{
 /* label */
 label{
   width: 11em;
-  text-align: center;
+  text-align: left;
+  font-weight: bolder;
+  color: #1B9AAA;
+  text-shadow: 2px 2px 2px #f4f4F4;
 }
 
 /* button */
@@ -45,7 +115,9 @@ label{
 /* AFFICHAGE DES ARTICLES */
 
 /* CARDS */
-
+.btn{
+  border-radius: 2em;
+}
 .articleCard{
   text-align: center;
   display: block;
@@ -56,10 +128,12 @@ label{
   margin: 1em auto;
   max-width: 7em;
   text-align: center;
+  border-radius: 2em !important;
 }
 button a{
   color: white;
   transition: all 0.9s;
+
 }
 button a:hover{
   text-decoration: none;
@@ -73,6 +147,7 @@ button a:hover{
   margin: 2em auto;
   text-align: center;
   transition: all 0.9s;
+  border-radius: 2em !important;
 }
 #btnSubmitSupp:hover{
   transform: scale(1.09);

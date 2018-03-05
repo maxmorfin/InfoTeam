@@ -46,7 +46,7 @@ router.post('/creation', function (req, res) {
     };
 
     req.getConnection(function (error, conn) {
-        conn.query('insert into Commentaire set ? ', data, function (err, rows) {
+        conn.query('insert into Commentaire(auteurCommentaire, contenuCommentaire, dateCommentaire) values(?,?, now()) ', [data.auteurCommentaire, data.contenuCommentaire], function (err, rows) {
             if (err) throw err;
             console.log("insertion reussie");
 
@@ -85,7 +85,7 @@ router.post('/modiflink/:id', function (req, res) {
 
     };
     req.getConnection(function (error, conn) {
-        conn.query('Update Commentaire set ? where idCommentaire =  ? ', [data, idCommentaire.substr(1)], function (err, rows) { //
+        conn.query('Update Commentaire set auteurCommentaire =?, dateCommentaire=now(),contenuCommentaire=? where idCommentaire =  ? ', [data.auteurCommentaire, data.contenuCommentaire, idCommentaire.substr(1)], function (err, rows) { //
             if (err) throw err;
             console.log("modification reussie");
             res.redirect('/')
