@@ -15,7 +15,7 @@
         </p>
 
         <div>
-            <form action="/personne/modification" method="POST">
+            <form action="/personne/modifmdp" method="POST">
                 <div class="form-group">
                     Ancien mot de passe:
                     <input class="form-control" type="password" name="mdpFormOld" required/>
@@ -27,6 +27,18 @@
                 <button type="submit" class="btn btn-primary">Modification</button>
             </form>
         </div>
+
+                <% if(badOldMdp == 1){%>
+                    <div>
+                        <p>Votre ancien mot de passe n'est pas celui attendu</p>
+                    </div>
+                    <% } %>
+                
+                        <% if(newMdpSuccess == 1){%>
+                            <div>
+                                <p>Mot de passe modifier avec succes</p>
+                            </div>
+                            <% } %>
 
     </body>
 

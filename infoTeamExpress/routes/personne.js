@@ -133,8 +133,8 @@ router.post('/inscription', function (req, res, next) {
 
 router.get('/modification', function (req, res, next) {
 
-    //TO DO: modifier avec les sessions pour recuperer les infos de celui qui est connecté
-    let num = 3;
+    
+    let num = req.session.idUser;
 
     req.getConnection(function (error, conn) {
         conn.query('select * from personne where id=?', [num], function (err, rows) {
@@ -159,8 +159,7 @@ router.get('/modification', function (req, res, next) {
 
 router.post('/modification', function (req, res, next) {
 
-    //TO DO: modifier avec les sessions pour recuperer les infos de celui qui est connecté
-    let num = 3;
+    let num = req.session.idUser;
 
     var data = {
         nom: req.body.nomForm,
@@ -171,7 +170,7 @@ router.post('/modification', function (req, res, next) {
     let mailExistant = 0; // à 1 si on trouve deja le mail dans la bdd
 
     req.getConnection(function (error, conn) { //requete vers la base pour comparer le mail rentrer en formulaire avec les mails deja present dans la bdd
-        conn.query('select mail from personne', function (err, rows) {
+        conn.query('select mail from personne where id != ?',[num], function (err, rows) {
             if (err) {
                 throw err;
             } else {
@@ -197,13 +196,13 @@ router.post('/modification', function (req, res, next) {
                             //res.send("insertion reussie");
                             //res.redirect("/");
                             req.getConnection(function (error, conn) {
-                                conn.query('select * from personne where id=?', [num], function (err, rows) {
+                                conn.query('select * from personne where id=?', [num], function (err, rows2) {
                                     if (err) {
                                         throw err;
                                     } else {
-                                        console.log(rows);
+                                        console.log(rows2);
                                         res.render('personneModification', {
-                                            title: 'Page de gestion de compte', mailexist: 0, modifok: 1, n: rows[0].nom, p: rows[0].prenom, m: rows[0].mail, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
+                                            title: 'Page de gestion de compte', mailexist: 0, modifok: 1, n: rows2[0].nom, p: rows2[0].prenom, m: rows2[0].mail, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
                                         });
                                     }
 
@@ -213,14 +212,21 @@ router.post('/modification', function (req, res, next) {
 
                     });
                 });
-
-
+                
             } else {
                 console.log("mail existant");
 
-                //res.redirect('/personne/inscription');
-                res.render('personneModification', {
-                    title: 'Page de gestion de compte', mailexist: 1, modifok: 0, n: rows[0].nom, p: rows[0].prenom, m: rows[0].mail, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
+                req.getConnection(function (error, conn) {
+                    conn.query('select * from personne where id=?', [num], function (err, rows) {
+                        if (err) {
+                            throw err;
+                        } else {
+                            //res.redirect('/personne/inscription');
+                            res.render('personneModification', {
+                                title: 'Page de gestion de compte', mailexist: 1, modifok: 0, n: rows[0].nom, p: rows[0].prenom, m: rows[0].mail, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
+                            });
+                        }
+                    });
                 });
             }
 
@@ -313,6 +319,7 @@ router.post('/connexionsubmit', function (req, res, next) {
                     req.session.typeUser = rows[0].type;
                     req.session.nomUser = rows[0].nom;
                     req.session.prenomUser = rows[0].prenom;
+                    req.session.mailUser = rows[0].mail
                     console.log(req.session.typeUser);
                     
 
@@ -360,6 +367,9 @@ router.get('/deconnexion', function (req, res, next) {
     req.session.connected = false;
     req.session.idUser = null;
     req.session.typeUser = null;
+    req.session.nomUser = null;
+    req.session.prenomUser = null;
+    req.session.mailUser = null;
     res.redirect('/');
 });
 

@@ -8,11 +8,8 @@
         <section class="container">
             <div class="row">
                 <% for (let i = 0; i < tabN.length; i++) {%>
-                    <div class="col-md-12">
+                    <div class="col-md-4">
                         <div class="card border-primary mb-12 articleCard" style="max-width: 60rem;">
-                            <div class="card-header">
-                                <%= tabTag[i] %>
-                            </div>
                             <div class="card-body text-primary">
                                 <h5 class="card-title">
                                     <%= tabT[i] %>
@@ -24,6 +21,7 @@
                             <div class="card-header">
                                 <%= tabA[i] %>
                                 <%= tabD[i] %>
+
                             </div>
                         </div>
                     </div>

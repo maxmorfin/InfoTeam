@@ -31,7 +31,7 @@
             <form action="/article/modification/:<%= tabN[i]%>" method="POST">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" for="titre">Modifier votre Titre</label>
+                        <label class="input-group-text" for="titre">Modifiez votre Titre</label>
                     </div>
                     <input type="text" class="form-control" aria-label="Titre" aria-describedby="inputGroup-sizing-sm" name="titre" id="titre" value="<%= tabT[i] %>">
                 </div>
@@ -51,7 +51,7 @@
                     </div>
                     <textarea class="form-control" aria-label="contenuArticle" name="contenuArticle" id="contenuArticle" rows="10"><%= tabC[i] %></textarea>
                 </div>
-                <button type="submit" class="btn btn-success" id="btnSubmit">Modifier Votre Article</button>
+                <button type="submit" class="btn btn-success" id="btnSubmit">Modifiez Votre Article</button>
             </form>
         </section>
         <% } %>

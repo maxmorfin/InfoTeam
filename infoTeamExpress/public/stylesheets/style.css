@@ -47,7 +47,7 @@ h2{
   margin: 0 auto;
 }
 p{
-  color: #DDDBCB;
+  color: #7D7C84;
   font-family: 'Nanum Gothic', sans-serif;
   text-align: center;
   font-weight: bolder;
@@ -122,6 +122,26 @@ label{
   text-align: center;
   display: block;
   margin: 1em auto;
+  height: 12em;
+  border-color: #1B9AAA !important;
+}
+.card-title{
+  text-transform: uppercase;
+  color: #DE8F6E;
+  font-weight: bolder;
+}
+.card-text{
+  color: #272838;
+}
+.card-body{
+  height: 8em;
+}
+.card-header{
+  height: 4em;
+  color: #7D7C84;
+  font-weight: bolder;  
+  text-transform: capitalize;
+  text-align: left;
 }
 .btnCard{
   display: block;
