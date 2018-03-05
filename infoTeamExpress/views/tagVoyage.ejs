@@ -20,22 +20,28 @@
         <section class="container">
             <div class="row">
                 <% for (let i = 0; i < tabN.length; i++) {%>
-                    <div class="col-md-12">
-                        <div class="card border-primary mb-12 articleCard" style="max-width: 60rem;">
-                            <div class="card-header">
-                                <%= tabTag[i] %>
-                            </div>
+                    <div class="col-md-4 oneCard">
+                        <form action="/article/afficherFull/:<%= tabN[i]%>" method="GET" class="col-md-6">
+                            <button type="submit" class="btn btn-outline-primary col-md-6 btnCard">
+                                afficher
+                            </button>
+                        </form>
+                        <<div class="card border-primary mb-12 articleCard" style="max-width: 60rem;">
                             <div class="card-body text-primary">
+                        
                                 <h5 class="card-title">
                                     <%= tabT[i] %>
                                 </h5>
+                        
                                 <p class="card-text">
                                     <%= tabC[i] %>
                                 </p>
                             </div>
                             <div class="card-header">
                                 <%= tabA[i] %>
+                                    <%= tabD[i] %>
                             </div>
+                        
                         </div>
                     </div>
                     <% } %>

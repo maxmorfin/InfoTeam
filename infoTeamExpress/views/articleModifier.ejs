@@ -28,9 +28,6 @@
             <% for (let i = 0; i < tabN.length; i++) {%>
                 <div class="col-md-4">
                     <div class="card border-primary mb-3 articleCard" style="max-width: 18rem; max-height: 22rem;">
-                        <div class="card-header">
-                            <%= tabTag[i] %>
-                        </div>
                         <div class="card-body text-primary">
                             <h5 class="card-title">
                                 <%= tabT[i] %>
@@ -44,12 +41,12 @@
                         </div>
                         <div class="row">
                             <form action="/article/modification/:<%= tabN[i]%>" method="GET" class="col-md-6">
-                            <button type="submit" class="btn btn-success col-md-6 btnCard">
+                            <button type="submit" class="btn btn-outline-success col-md-6 btnCard">
                                 Modifier
                             </button>
                             </form>
                             <form action="/article/suppression/:<%= tabN[i]%>" method="GET" class="col-md-6">
-                                <button type="submit" class="btn btn-danger col-md-6 btnCard">
+                                <button type="submit" class="btn btn-outline-danger col-md-6 btnCard">
                                     Supprimer
                                 </button>
                             </form>

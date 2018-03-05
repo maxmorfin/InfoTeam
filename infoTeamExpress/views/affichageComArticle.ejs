@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<% include header %>
+
+<% include navbar %>
+
+    <section class="container">
+    <% for (let i = 0; i < tabComI.length; i++) {%>
+        <div class="card-group articleCard">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">
+                        <%= tabComC[i] %>
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">
+                        <%= tabComD[i] %>
+                            <%= tabComN[i] %>
+                    </small>
+                </div>
+            </div>
+        </div>
+        <form action="/commentaire/modifierLink/:<%= tabComN[i]%>" method="GET" class="col-md-6">
+            <button type="submit" class="btn btn-outline-success col-md-6 btnCard">
+                Modifier
+            </button>
+        </form>
+
+        <% } %>
+    </section>
+            
+    </body>
+
+</html>

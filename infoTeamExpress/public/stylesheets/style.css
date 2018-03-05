@@ -16,6 +16,9 @@ font-family: 'Krona One', sans-serif;
 body{
   transition: all 0.9s;
   font-family: 'Nanum Gothic', sans-serif;
+  /* background-image: url(/images/background.jpg);
+  background-position: center;
+  background-size: cover; */
 }
 a{
   text-decoration: none;
@@ -106,7 +109,8 @@ label{
   transition: all 0.9s;
   width: 8em;
   height: 3em;
-  text-align: auto;
+  text-align: center !important ;
+  border-radius: 2em;
 }
 .btn:hover{
   transform: scale(1.09);
@@ -115,8 +119,16 @@ label{
 /* AFFICHAGE DES ARTICLES */
 
 /* CARDS */
-.btn{
-  border-radius: 2em;
+.oneCard form{
+  text-align: center;
+  margin: auto;
+}
+.oneCard button{
+  height: auto;
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+
 }
 .articleCard{
   text-align: center;
@@ -129,12 +141,19 @@ label{
   text-transform: uppercase;
   color: #DE8F6E;
   font-weight: bolder;
+  text-align: center;
 }
 .card-text{
   color: #272838;
+  
 }
 .card-body{
   height: 8em;
+  overflow: hidden;
+}
+#articleFull .card-body{
+  height: auto;
+  overflow: visible;
 }
 .card-header{
   height: 4em;
@@ -142,6 +161,9 @@ label{
   font-weight: bolder;  
   text-transform: capitalize;
   text-align: left;
+}
+#articleFull .card-header{
+  height: auto;
 }
 .btnCard{
   display: block;

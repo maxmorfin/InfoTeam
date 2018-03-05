@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<% include header %>
+
+    <body>
+
+        <!-- NAVIGATION -->
+        <% include navbar %>
+
+        <% for (let i = 0; i < tabN.length; i++) {%>
+        <div class="row">
+                <div class="col-md-8">
+                    <div class="card-group" id="articleFull">
+                        <div class="card">
+                            <img class="card-img-top" src="/images/sportCard.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= tabT[i] %></h5>
+                                <p class="card-text"><%= tabC[i] %></p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted"><%= tabD[i] %> <%= tabA[i] %></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <form action="/commentaire/affichageComArticle/:<%= idArticle %> " method="GET" class="col-md-12">
+                        <button type="submit" class="btn btn-primary col-md-6 btnCard">
+                            Commentaires
+                        </button>
+                    </form>
+                    
+                </div>
+            
+        </div>
+        <% } %>
+    </body>
+
+</html>

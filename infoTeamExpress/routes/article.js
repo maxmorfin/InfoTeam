@@ -145,6 +145,40 @@ router.get('/suppression/:id', function (req, res, next) {
         });
     });
 });
+router.get('/afficherFull/:id', function (req, res, next) {
+    let idArticle = req.params.id.substr(1);
+    // req.session.numArticle = req.params.id;
+    let numArticle = [];
+    let titre = [];
+    let auteurArticle = [req.session.nomUser];
+    let tag = [];
+    let datePublication = [];
+    let etat = [];
+    let nbVue = [];
+    let contenuArticle = [];
+
+    req.getConnection(function (err, connection) {
+        connection.query("Select * from Article where numArticle = ? ", [idArticle], function (err, result) {
+            if (err) {
+                throw err;
+            } else {
+                for (let i = 0; i < result.length; i++) {
+                    numArticle[i] = result[i].numArticle;
+                    titre[i] = result[i].titre;
+                    auteurArticle[i] = result[i].auteurArticle;
+                    tag[i] = result[i].tag;
+                    datePublication[i] = result[i].datePublication;
+                    etat[i] = result[i].etat;
+                    nbVue[i] = result[i].nbVue;
+                    contenuArticle[i] = result[i].contenuArticle;
+                }
+                res.render('articleFull', {
+                    title: 'affichage des articles full', tabN: numArticle, tabT: titre, tabA: auteurArticle, tabTag: tag, tabD: datePublication, tabE: etat, tabV: nbVue, tabC: contenuArticle, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser, idArticle : idArticle
+                });
+            };
+        });
+    });
+});
 router.get('/economie', function (req, res, next) {
     let numArticle = [];
     let titre = [];
@@ -241,6 +275,7 @@ router.get('/sport', function (req, res, next) {
         });
     });
 });
+
 
 //POST
 router.post('/ajouter', (req,res) => {

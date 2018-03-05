@@ -24,22 +24,22 @@
             </form>
 
             <ul>
-                <% for (let i = 0; i < tabN.length; i++) {%>
+                <% for (let i = 0; i < tabComN.length; i++) {%>
                     <li class="list-group-item">Nom:
-                        <%= tabN[i] %>
+                        <%= tabComN[i] %>
                             <br> message:
-                            <%= tabD[i]%>
-                            <%= tabC[i] %>
-                                <form action="/commentaire/supplink/:<%= tabI[i]%>" method="post">
+                            <%= tabComD[i]%>
+                            <%= tabComC[i] %>
+                                <form action="/commentaire/supplink/:<%= tabComI[i]%>" method="post">
                                     <button type="submit" class="btn btn-danger btn-sm">supprimer</button>
                                     <button type="button" onclick="toggleForm(<%= i %>)" class="btn btn-primary btn-sm">Modifier</button>
                                 </form>
 
                                 <div id="edit_<%= i %>" style="display:none;">
-                                    <form action="/commentaire/modiflink/:<%= tabI[i]%>" method="post">
+                                    <form action="/commentaire/modiflink/:<%= tabComI[i]%>" method="post">
 
-                                        <input type="text" name="prenom" value="<%= tabN[i] %>" hidden />
-                                        <input type="text" name="commentaire" value="<%= tabC[i] %>" required/>
+                                        <input type="text" name="prenom" value="<%= tabComN[i] %>" hidden />
+                                        <input type="text" name="commentaire" value="<%= tabComC[i] %>" required/>
                                         <button type="submit" class="btn btn-success btn-sm">modifier</button>
                                     </form>
                                 </div>
