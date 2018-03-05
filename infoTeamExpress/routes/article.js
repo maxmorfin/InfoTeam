@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var nodemailer = require('nodemailer');
 
 
 //GET
@@ -290,6 +291,34 @@ router.post('/ajouter', (req,res) => {
         if (err) throw err;
         console.log('insertion reussit');
     })
+
+        req.getConnection(function (err, connection) {
+            connection.query("select mail from personne where abonne = 1", function (err, rows) {
+                for (let i = 0; i < rows.length; i++) {
+                    var transporter = nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                            user: 'infoTeamRoger@gmail.com',
+                            pass: 'infoteam13100'
+                        }
+                    });
+
+                    var mailOptions = {
+                        from: 'infoTeamRoger@gmail.com',
+                        to: rows[i].mail,
+                        subject: 'Infoteam : nouvel article: ' + data.titre,
+                        text: 'Un nouvel article est à présent disponible sur le site dans la rubrique ' + data.tag + ':' + data.titre + '. N\'hésitez pas à venir le consulter.'
+                    };
+                    transporter.sendMail(mailOptions, function (error, info) {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log('Email sent: ' + info.response);
+                        }
+                    });
+                }
+            })
+        })
     res.render('articleAjouter', {
         connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
     });

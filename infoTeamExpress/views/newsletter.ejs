@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<% include header %>
+
+    <body>
+
+        <!-- NAVBAR -->
+
+        <% include navbar%>
+
+
+            <!-- TAG NAV BAR -->
+            <nav class="nav nav-pills nav-justified">
+                <a class="nav-item nav-link" href="/">Derniere news</a>
+                <a class="nav-item nav-link" href="/article/sport">Sport</a>
+                <a class="nav-item nav-link" href="/article/economie">Economie</a>
+                <a class="nav-item nav-link" href="/article/voyage">Voyage</a>
+            </nav>
+
+            <p>S'abonner à notre newsletter : </p>
+            <form name="form1" method="post" action="/mail/abonnement">
+                non
+                <input type="radio" name="x" value="0" <%=nonabonne %> > oui
+                <input type="radio" name="x" value="1" <%=ouiabonne %> >
+                <input type="submit" value="Envoyer">
+            </form>
+
+            <% if (toggleabonne == 0){ %>
+                <p>Désinscription à la newsletter validée</p>
+                <% }else if (toggleabonne == 1) { %>
+                    <p>Inscription à la newsletter validée</p>
+                    <%}%>
+    </body>
+
+
+    <% include footer %>
+
+</html>

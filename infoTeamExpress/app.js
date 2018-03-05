@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var nodemailer = require('nodemailer');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -11,6 +12,7 @@ var users = require('./routes/users');
 var article = require('./routes/article');
 var commentaire = require('./routes/commentaire');
 var personne = require('./routes/personne');
+var mail = require('./routes/mail');
 var app = express();
 
 /////////////npm install --save express-session
@@ -61,6 +63,7 @@ app.use('/users', users);
 app.use('/article', article);
 app.use('/commentaire', commentaire);
 app.use('/personne', personne);
+app.use('/mail',mail);
 
 
 

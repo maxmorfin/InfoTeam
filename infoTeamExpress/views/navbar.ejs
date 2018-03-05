@@ -15,6 +15,9 @@
             </a>
             
             <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Accueil</a>
+                </li>
                 <%if (typeUser == 'journaliste'){ %>
                     <li class="nav-item">
                         <a class="nav-link" href="/article/ajouter">Poster un Article</a>
@@ -23,8 +26,9 @@
                         <a class="nav-link" href="/article/modifier">Modifier un Article</a>
                     </li>
                 <% } %>
+                
                 <li class="nav-item">
-                    <a class="nav-link active" href="/">Accueil</a>
+                    <a class="nav-link" href="/personne/modification">Gestion de Compte</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="/personne/deconnexion">Déconnexion</a>

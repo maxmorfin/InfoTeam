@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var nodemailer = require('nodemailer');
 
 router.get('/affichage', function (req, res, next) {
     console.log("dans la route testget");
@@ -96,6 +96,29 @@ router.post('/inscription', function (req, res, next) {
                 if (mailExistant == 0) {
                     console.log("on peut continuer");
 
+                    //confirmation par mail
+                    var transporter = nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                            user: 'infoTeamRoger@gmail.com',
+                            pass: 'infoteam13100'
+                        }
+                    });
+
+                    var mailOptions = {
+                        from: 'infoTeamRoger@gmail.com',
+                        to: data.mail,
+                        subject: 'Confirmation d\'inscription',
+                        text: 'vous êtes maintenant inscrit sur notre super site qui ne marche pas'
+                    };
+                    transporter.sendMail(mailOptions, function (error, info) {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log('Email sent: ' + info.response);
+                        }
+                    });
+
                     req.getConnection(function (error, conn) {
                         //conn.query('insert into personne set ?', data, function (err, rows) {
                         conn.query('insert into personne (nom, prenom, mail, mdp) values (?,?,?, SHA1(?))',[data.nom,data.prenom,data.mail,data.mdp], function (err, rows) {
@@ -133,7 +156,6 @@ router.post('/inscription', function (req, res, next) {
 
 router.get('/modification', function (req, res, next) {
 
-    
     let num = req.session.idUser;
 
     req.getConnection(function (error, conn) {
@@ -141,9 +163,10 @@ router.get('/modification', function (req, res, next) {
             if (err) {
                 throw err;
             } else {
+                req.session.errors = null;
                 console.log(rows);
                 res.render('personneModification', {
-                    title: 'Page de gestion de compte', mailexist: 0, modifok: 0, n: rows[0].nom, p: rows[0].prenom, m: rows[0].mail, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
+                    title: 'Page de gestion de compte', mailexist: 0, modifok: 0, n: rows[0].nom, p: rows[0].prenom, m: rows[0].mail, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser, errors: req.session.errors
                 });
             }
 
@@ -167,75 +190,97 @@ router.post('/modification', function (req, res, next) {
         mail: req.body.mailForm
     };
 
-    let mailExistant = 0; // à 1 si on trouve deja le mail dans la bdd
+    console.log(req.check('mailForm', 'email invalide').isEmail());
+    var errors = req.validationErrors();
+    if (errors) {
+        console.log(errors);
+        req.session.errors = errors;
+        req.getConnection(function (error, conn) {
+            conn.query('select * from personne where id=?', [num], function (err, rows) {
+                if (err) {
+                    throw err;
+                } else {
+                    res.render('personneModification', {
+                        title: 'Page de gestion de compte', mailexist: 0, modifok: 0, n: rows[0].nom, p: rows[0].prenom, m: rows[0].mail, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser, errors: req.session.errors
+                    });
+                }
 
-    req.getConnection(function (error, conn) { //requete vers la base pour comparer le mail rentrer en formulaire avec les mails deja present dans la bdd
-        conn.query('select mail from personne where id != ?',[num], function (err, rows) {
-            if (err) {
-                throw err;
-            } else {
-                for (let i = 0; i < rows.length; i++) {
-                    console.log(rows[i].mail);
-                    if (rows[i].mail == data.mail) {
-                        mailExistant = 1;
+            });
+        });
+
+    } else {
+        req.session.errors = null;
+        let mailExistant = 0; // à 1 si on trouve deja le mail dans la bdd
+
+        req.getConnection(function (error, conn) { //requete vers la base pour comparer le mail rentrer en formulaire avec les mails deja present dans la bdd
+            conn.query('select mail from personne where id!=?', [num], function (err, rows) {
+                if (err) {
+                    throw err;
+                } else {
+                    for (let i = 0; i < rows.length; i++) {
+                        console.log(rows[i].mail);
+                        if (rows[i].mail == data.mail) {
+                            mailExistant = 1;
+                        }
                     }
                 }
-            }
 
-            if (mailExistant == 0) {
-                console.log("on peut continuer");
+                if (mailExistant == 0) {
+                    console.log("on peut continuer");
 
-                //TO DO: requete à modifier, update
+                    //TO DO: requete à modifier, update
 
-                req.getConnection(function (error, conn) {
-                    conn.query('update personne set nom = ?, prenom = ? , mail = ?  where id = ? ', [data.nom, data.prenom, data.mail, num], function (err, rows) {
-                        if (err) {
-                            throw err;
-                        } else {
-                            console.log("update reussie");
-                            //res.send("insertion reussie");
-                            //res.redirect("/");
-                            req.getConnection(function (error, conn) {
-                                conn.query('select * from personne where id=?', [num], function (err, rows2) {
-                                    if (err) {
-                                        throw err;
-                                    } else {
-                                        console.log(rows2);
-                                        res.render('personneModification', {
-                                            title: 'Page de gestion de compte', mailexist: 0, modifok: 1, n: rows2[0].nom, p: rows2[0].prenom, m: rows2[0].mail, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
-                                        });
-                                    }
+                    req.getConnection(function (error, conn) {
+                        conn.query('update personne set nom = ?, prenom = ? , mail = ?  where id = ? ', [data.nom, data.prenom, data.mail, num], function (err, rows) {
+                            if (err) {
+                                throw err;
+                            } else {
+                                console.log("update reussie");
+                                //res.send("insertion reussie");
+                                //res.redirect("/");
+                                req.getConnection(function (error, conn) {
+                                    conn.query('select * from personne where id=?', [num], function (err, rows2) {
+                                        if (err) {
+                                            throw err;
+                                        } else {
+                                            console.log(rows2);
+                                            req.session.nomUser = rows2[0].nom;
+                                            req.session.prenomUser = rows2[0].prenom;
+                                            req.session.mailUser = rows2[0].mail;
+                                            res.render('personneModification', {
+                                                title: 'Page de gestion de compte', mailexist: 0, modifok: 1, n: rows2[0].nom, p: rows2[0].prenom, m: rows2[0].mail, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser, errors: req.session.errors
+                                            });
+                                        }
 
+                                    });
                                 });
-                            });
-                        }
+                            }
 
+                        });
                     });
-                });
-                
-            } else {
-                console.log("mail existant");
 
-                req.getConnection(function (error, conn) {
-                    conn.query('select * from personne where id=?', [num], function (err, rows) {
-                        if (err) {
-                            throw err;
-                        } else {
-                            //res.redirect('/personne/inscription');
-                            res.render('personneModification', {
-                                title: 'Page de gestion de compte', mailexist: 1, modifok: 0, n: rows[0].nom, p: rows[0].prenom, m: rows[0].mail, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
-                            });
-                        }
+
+                } else {
+                    console.log("mail existant");
+
+                    req.getConnection(function (error, conn) {
+                        conn.query('select * from personne where id=?', [num], function (err, rows) {
+                            if (err) {
+                                throw err;
+                            } else {
+                                //res.redirect('/personne/inscription');
+                                res.render('personneModification', {
+                                    title: 'Page de gestion de compte', mailexist: 1, modifok: 0, n: rows[0].nom, p: rows[0].prenom, m: rows[0].mail, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser, errors: req.session.errors
+                                });
+                            }
+                        });
                     });
-                });
-            }
-
-
+                }
+            });
         });
-    });
 
 
-
+    }//fin du else du if des errors des validators
     /*
     res.render('personnemodification', {
         title: 'Page de gestion de compte', mailexist: 0, modifok:1
@@ -245,9 +290,9 @@ router.post('/modification', function (req, res, next) {
 });
 
 router.get('/modifmdp', function (req, res, next) {
-
+    req.session.errors = null;
     res.render('personneModifMdp', {
-        title: 'Page de modification de mot de passe', newMdpSuccess: 0, badOldMdp: 0, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
+        title: 'Page de modification de mot de passe', newMdpSuccess: 0, badOldMdp: 0, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser, errors: req.session.errors
     });
 
 });
@@ -256,36 +301,46 @@ router.post('/modifmdp', function (req, res, next) {
     let mdpOld = req.body.mdpFormOld;
     let newMdp = req.body.mdpFormNew;
 
-    req.getConnection(function (err, connexion) {
-        connexion.query("Select mdp from Personne where id = ? ", [num], function (err, result) {
-            if (err) {
-                throw err;
-            } else {
+    req.check('mdpFormNew', 'mot de passe(s) invalide(s)').isLength({ min: 4 }).equals(req.body.mdpFormNewBis);
+    var errors = req.validationErrors();
+    if (errors) {
+        console.log(errors);
+        req.session.errors = errors;
+        res.render('personneModifMdp', {
+            title: 'Page de modification de mot de passe', newMdpSuccess: 0, badOldMdp: 0, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser, errors: req.session.errors
+        });
+    } else {
 
-                connexion.query('select sha1(?) as testsha', mdpOld, function (err, resultest) {
-                    if (err) {
-                        throw err;
-                    } else {
-                        console.log("mdp bdd:", result[0].mdp, "mdpold entré:", resultest[0].testsha);
-                        if (result[0].mdp == resultest[0].testsha) {
-                            connexion.query("Update Personne set mdp = sha1(?) where id = ? ", [newMdp, num], function (err, rows) {
-                                if (err) throw err;
-                                res.render('personneModifMdp', {
-                                    title: 'Page de modification de mot de passe', newMdpSuccess: 1, badOldMdp: 0, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
-                                });
-                            })
+        req.getConnection(function (err, connexion) {
+            connexion.query("Select mdp from Personne where id = ? ", [num], function (err, result) {
+                if (err) {
+                    throw err;
+                } else {
+
+                    connexion.query('select sha1(?) as testsha', mdpOld, function (err, resultest) {
+                        if (err) {
+                            throw err;
                         } else {
-                            res.render('personneModifMdp', {
-                                title: 'Page de modification de mot de passe', newMdpSuccess: 0, badOldMdp: 1, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser
-                            });
+                            console.log("mdp bdd:", result[0].mdp, "mdpold entré:", resultest[0].testsha);
+                            if (result[0].mdp == resultest[0].testsha) {
+                                connexion.query("Update Personne set mdp = sha1(?) where id = ? ", [newMdp, num], function (err, rows) {
+                                    if (err) throw err;
+                                    res.render('personneModifMdp', {
+                                        title: 'Page de modification de mot de passe', newMdpSuccess: 1, badOldMdp: 0, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser, errors: req.session.errors
+                                    });
+                                })
+                            } else {
+                                res.render('personneModifMdp', {
+                                    title: 'Page de modification de mot de passe', newMdpSuccess: 0, badOldMdp: 1, connected: req.session.connected, typeUser: req.session.typeUser, nomUser: req.session.nomUser, prenomUser: req.session.prenomUser, errors: req.session.errors
+                                });
+                            }
                         }
-                    }
-                });
+                    });
 
-            }
-        })
-    })
-
+                }
+            });
+        });
+    }//fin du else du if des errors des validators
 });
 
 

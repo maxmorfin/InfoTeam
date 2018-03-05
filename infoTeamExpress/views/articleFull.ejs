@@ -8,8 +8,7 @@
         <% include navbar %>
 
         <% for (let i = 0; i < tabN.length; i++) {%>
-        <div class="row">
-                <div class="col-md-8">
+
                     <div class="card-group" id="articleFull">
                         <div class="card">
                             <img class="card-img-top" src="/images/sportCard.jpg" alt="Card image cap">
@@ -22,7 +21,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
                 
                 <div class="col-md-4">
                     <form action="/commentaire/affichageComArticle/:<%= idArticle %> " method="GET" class="col-md-12">
@@ -30,10 +28,9 @@
                             Commentaires
                         </button>
                     </form>
-                    
                 </div>
             
-        </div>
+ 
         <% } %>
     </body>
 
