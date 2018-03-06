@@ -36,11 +36,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="collapse" id="collapseExample">
+                <div class="collapse btnModifCom" id="collapseExample">
                     
-                        <form action="/commentaire/creation/:<%= idArticle %>" method="POST">
-                            <textarea class="card card-body" name="commentaire" id="commentaire" cols="13" rows="4"></textarea>
-                            <button class="btn btn-outline-primary" type="submit">Ajouter</button>
+                        <form action="/commentaire/creation/:<%= idArticle %>" method="POST" class="formArticle">
+                            <input type="text">
+                            <button class="btn btn-outline-primary btnCard" type="submit"><img src="/images/validIcon.svg" alt="validIcon"></button>
                         </form>
                         
                     
@@ -53,9 +53,9 @@
                 </form>
                 <% if (connected){ %>
 
-                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                        <button class="btn btn-outline-primary btnCard" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
                             aria-controls="collapseExample">
-                            Ajouter un commentaire
+                            + commentaire
                         </button>
                     
                     

@@ -10,20 +10,21 @@
 
 
             <!-- TAG NAV BAR -->
-            <nav class="nav nav-pills nav-justified">
-                <a class="nav-item nav-link" href="/">Derniere news</a>
-                <a class="nav-item nav-link" href="/article/sport">Sport</a>
-                <a class="nav-item nav-link" href="/article/economie">Economie</a>
-                <a class="nav-item nav-link" href="/article/voyage">Voyage</a>
-            </nav>
+            
 
-            <p>S'abonner à notre newsletter : </p>
-            <form name="form1" method="post" action="/mail/abonnement">
-                non
-                <input type="radio" name="x" value="0" <%=nonabonne %> > oui
-                <input type="radio" name="x" value="1" <%=ouiabonne %> >
-                <input type="submit" value="Envoyer">
-            </form>
+            <h2>S'abonner à notre newsletter : </h2>
+            <div class="btnModifCom">
+                <form name="form1" method="post" action="/mail/abonnement" id="formNewsLetter">
+                    <label for="x">Se Désabonner</label>
+                    <input type="radio" name="x" value="0" <%=nonabonne %> >
+                    <br>
+                    <label for="x">S'abonner</label>
+                    <input type="radio" name="x" value="1" <%=ouiabonne %> >
+                    <br>
+                    <button type="submit" class="btn btn-outline-primary btnCard"><img src="/images/validIcon.svg" alt="validIcon"></button>
+                </form>
+            </div>
+            
 
             <% if (toggleabonne == 0){ %>
                 <p>Désinscription à la newsletter validée</p>

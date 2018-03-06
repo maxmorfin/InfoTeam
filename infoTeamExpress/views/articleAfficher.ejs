@@ -20,7 +20,13 @@
                                     <img class="card-img-top" src="/images/economieCard.jpg" alt="Card image cap">
                                 <% } %>
                                 <div class="card-body text-primary">
-                                    
+                                    <div class="btnModifCom">
+                                        <form action="/article/afficherFull/:<%= tabN[i]%>" method="GET" class="col-md-12">
+                                            <button type="submit" class="btn btn-outline-primary col-md-6 btnCard">
+                                                <img src="/images/lireIcon.svg" alt="lireIcon">
+                                            </button>
+                                        </form>
+                                    </div>  
                                     <h5 class="card-title">
                                         <%= tabT[i] %>
                                     </h5>
@@ -28,19 +34,19 @@
                                     <p class="card-text">
                                         <%= tabC[i] %>
                                     </p>
+                                    
                                 </div>
-                                <div class="card-header">
-                                    <%= tabA[i] %>
+                                <div class="card-footer">
+                                    <small class="text-muted">
                                         <%= tabD[i] %>
+                                            <%= tabA[i] %>
+                                    </small>
                                 </div>
                                 
                             </div>
                         </div>
-                        <form action="/article/afficherFull/:<%= tabN[i]%>" method="GET" class="col-md-12">
-                            <button type="submit" class="btn btn-outline-primary col-md-6 btnCard">
-                                afficher
-                            </button>
-                        </form>
+                       
+                        
                     </div>
                 <% } %>
             </div>

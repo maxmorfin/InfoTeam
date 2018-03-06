@@ -34,9 +34,14 @@
                             </div>
                         </div>
                     </div>
-                    <form action="/article/suppression/:<%= tabN[i]%>" method="POST">
-                        <button type="submit" class="btn btn-outline-danger" id="btnSubmitSupp">Supprimez</button>
-                    </form>
+                    <div class="btnModifCom">
+                        <form action="/article/suppression/:<%= tabN[i]%>" method="POST">
+                            <button type="submit" class="btn btn-outline-danger btnCard" id="btnSubmitSupp">
+                                <img src="/images/deleteIcon.svg" alt="deleteIcon">
+                            </button>
+                        </form>
+                    </div>
+                   
                 <% } %>
             </div>
         </section>

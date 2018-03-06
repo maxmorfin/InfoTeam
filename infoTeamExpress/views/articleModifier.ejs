@@ -24,21 +24,24 @@
                         <div class="card-header">
                             <%= tabA[i] %>
                         </div>
-                        <div class="row">
-                            <form action="/article/modification/:<%= tabN[i]%>" method="GET" class="col-md-6">
-                            <button type="submit" class="btn btn-outline-success col-md-6 btnCard">
-                                Modifier
-                            </button>
-                            </form>
-                            <form action="/article/suppression/:<%= tabN[i]%>" method="GET" class="col-md-6">
-                                <button type="submit" class="btn btn-outline-danger col-md-6 btnCard">
-                                    Supprimer
-                                </button>
-                            </form>
+                        
+                            <div class="btnModifCom">
+                                <form action="/article/modification/:<%= tabN[i]%>" method="GET" class="col-md-12 formModifArticle">
+                                    <button type="submit" class="btn btn-outline-success btnCard">
+                                        <img src="/images/modifIcon.svg" alt="modifIcon">
+                                    </button>
+                                </form>
+                                <form action="/article/suppression/:<%= tabN[i]%>" method="GET" class="col-md-12 formModifArticle">
+                                    <button type="submit" class="btn btn-outline-danger btnCard">
+                                        <img src="/images/deleteIcon.svg" alt="deleteIcon">
+                                    </button>
+                                </form>
+                            </div>
                             
                             
                             
-                        </div>
+                            
+                        
                     </div>
                 </div>
                 

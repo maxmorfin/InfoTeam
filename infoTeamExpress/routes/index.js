@@ -21,7 +21,7 @@ router.get('/', function (req, res, next) {
   let x = req.session.connected;
   console.log(x, 'cest la valeur de x');
   req.getConnection(function (err, connection) {
-    connection.query("Select * from Article", function (err, result) {
+    connection.query("SELECT * FROM Article ORDER BY datePublication desc", function (err, result) {
       if (err) {
         throw err;
       } else {

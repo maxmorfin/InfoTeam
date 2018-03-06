@@ -109,7 +109,7 @@ router.post('/inscription', function (req, res, next) {
                         from: 'infoTeamRoger@gmail.com',
                         to: data.mail,
                         subject: 'Confirmation d\'inscription',
-                        text: 'Bonjour ' + req.body.prenomForm + ' vous êtes maintenant inscrit sur notre site.'
+                        text: 'Bonjour ' + req.body.prenomForm + ',vous êtes maintenant inscrit sur notre site.'
                     };
                     transporter.sendMail(mailOptions, function (error, info) {
                         if (error) {

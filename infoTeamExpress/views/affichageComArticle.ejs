@@ -6,13 +6,30 @@
 
     <section class="container">
     <% for (let i = 0; i < tabComI.length; i++) {%>
-        <div class="card-group articleCard">
+        <div class="card-group articleCard ">
             <div class="card">
                 <div class="card-body">
+                    
                     <p class="card-text">
                         <%= tabComC[i] %>
                     </p>
                 </div>
+                <% if(connected){ %>
+                    <% if (idUserCom[i] == idUser) { %>
+                        <div class="btnModifCom">
+                            <button class="btn btn-outline-primary btnCard" type="button" data-toggle="collapse" data-target="#<%= tabComI[i] %>" aria-expanded="false"
+                                aria-controls="<% tabComI[i] %>">
+                                <img src="/images/modifIcon.svg" alt="modifIcon">
+                            </button>
+                            <form action="/commentaire/supplink/:<%= tabComI[i]%>" class="formModifCom" method="POST">
+                                <button class="btn btn-outline-danger btnCard" type="submit">
+                                    <img src="/images/deleteIcon.svg" alt="deleteIcon">
+                                </button>
+                            </form>
+                        </div>
+                
+                        <% } %>
+                            <% } %>
                 <div class="card-footer">
                     <small class="text-muted">
                         <%= tabComD[i] %>
@@ -21,28 +38,18 @@
                 </div>
             </div>
         </div>
-        <div class="collapse" id="<%= tabComI[i] %>">
+        
+        <div class="collapse btnModifCom" id="<%= tabComI[i] %>">
         
             <form action="/commentaire/modifierLink/:<%= tabComI[i] %>" method="POST">
-                <textarea class="card card-body" name="commentairem" id="commentaire" cols="13" rows="4"><%= tabComC[i] %></textarea>
-                <button class="btn btn-outline-primary" type="submit">Comfirmer</button>
+                <input type="text" value="<%= tabComC[i] %>">
+                <button class="btn btn-outline-primary " type="submit"><img src="/images/validIcon.svg" alt="validIcon"></button>
             </form>
         
         
         </div>
         
-        <% if(connected){ %>
-        <% if (idUserCom[i] == idUser) { %>
-            
-            <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#<%= tabComI[i] %>" aria-expanded="false"
-                aria-controls="<% tabComI[i] %>">
-                Modifier
-            </button>
-            <form action="/commentaire/supplink/:<%= tabComI[i]%>" method="POST">
-                <button class="btn btn-outline-danger" type="submit">Supprimer</button>
-            </form>
-            <% } %>
-            <% } %>
+        
 
         <% } %>
     </section>

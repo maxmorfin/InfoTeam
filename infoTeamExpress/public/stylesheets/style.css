@@ -23,6 +23,24 @@ body{
 a{
   text-decoration: none;
   font-family: 'Montserrat', sans-serif;
+  color: #1B9AAA;
+}
+a:hover{
+  color: #1B9AAA;
+}
+form{
+  text-align: center;
+}
+
+#newsletterImgCo{
+  width: 2em;
+  height: 2em;
+  margin: auto;
+  transition: 0.9s;
+}
+#newsletterImgCo:hover{
+  transform: scale(1.09);
+  color: #DE8F6E;
 }
 h1{
   color: #1B9AAA;
@@ -49,8 +67,11 @@ h2{
   text-align: center;
   margin: 0 auto;
 }
+#navBar a{
+  text-decoration: none;
+}
 p{
-  color: #7D7C84;
+  color: #DE8F6E;
   font-family: 'Nanum Gothic', sans-serif;
   text-align: center;
   font-weight: bolder;
@@ -107,7 +128,10 @@ label{
   color: #1B9AAA;
   text-shadow: 2px 2px 2px #f4f4F4;
 }
-
+.form-group label{
+  display: block;
+  text-align: left;
+}
 /* button */
 .btn{
   display: block;
@@ -120,6 +144,7 @@ label{
 }
 .btn:hover{
   transform: scale(1.09);
+  
 }
 
 /* AFFICHAGE DES ARTICLES */
@@ -168,15 +193,20 @@ label{
   height: auto;
   overflow: visible;
 }
+#articleFull img{
+  height: 30em;
+}
 .card-header{
   height: 4em;
   color: #272838;
   font-weight: bolder;  
   text-transform: capitalize;
+  margin: auto;
   text-align: left;
 }
 .card-footer{
   background-color: #272838 !important;
+  text-transform: uppercase;
 }
 
 #articleFull .card-header{
@@ -197,14 +227,15 @@ label{
   color: #1B9AAA;
 }
 button a{
-  color: white;
+  color: #1B9AAA;
   transition: all 0.9s;
 
 }
 button a:hover{
   text-decoration: none;
-  color: white;
+  color: #1B9AAA;
   transform: scale(1.09);
+  
 }
 
 /* BUTTON SUPPRIMER */
@@ -231,4 +262,63 @@ button a:hover{
   min-width: 10em;
   border-radius: 2em;
   text-decoration: none;   
+}
+
+/* formulaire article */
+.formArticle{
+  width: auto;
+  height: 10em;
+  display: block;
+  margin: 1em auto;
+}
+.formArticle input{
+  display: block;
+  height: auto;
+  width: auto;
+  margin: 1em auto;
+}
+/* modifComBtn */
+.btnModifCom button{
+  display: inline-block;
+  margin: 1em auto;
+  height: auto;
+  width: auto;
+  border: none;
+}
+.btnModifCom button img{
+  display: inline-block;
+  height: 2em;
+  width: 2em;
+  margin: auto;
+}
+.formModifCom{
+  display: inline-block;
+  margin: auto;
+}
+.affCom{
+  border-bottom: 2px solid #272838;
+  margin-bottom: 2em;
+}
+.formModifArticle{
+  display: inline;
+  text-align: center;
+  margin: auto;
+}
+/* Form newsletter */
+
+
+#formNewsLetter input{
+  display: inline-block;
+
+}
+
+/* mdp */
+
+#lienModifMdp{
+  border: none;
+  transition: all 0.9s;
+}
+#lienModifMdp:hover{
+  color: #DE8F6E;
+  transform: scale(1.09)
 }

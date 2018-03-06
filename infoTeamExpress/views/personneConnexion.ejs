@@ -25,14 +25,14 @@
                     <label for="passwordForm">Mot de passe : </label>
                     <input class="form-control" type="password" name="passwordForm" id="passwordForm" required/>
                 </div>
-                <button type="submit" class="btn btn-primary">Connexion</button>
+                <button type="submit" class="btn btn-outline-primary btnCard">Connexion</button>
             </form>
 
 
             <% if (userExist == false) {%>
                 <p>L'user n'existe pas</p>
                 <%}%>
-                <button class="btn btn-success">
+                <button class="btn btn-outline-success btnCard">
                     <a href="/personne/inscription">Inscription</a>
                 </button>
                 
