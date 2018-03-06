@@ -10,9 +10,7 @@
         <h1>
             <%= title %>
         </h1>
-        <p>Welcome to
-            <%= title %>
-        </p>
+        
         <% if(badOldMdp == 1){%>
             <div>
                 <p>Votre ancien mot de passe n'est pas celui attendu</p>
@@ -33,23 +31,24 @@
                                     <% } %>
                             </ul>
                             <% }  %>
-        <div>
+        <section class="container">
             <form action="/personne/modifmdp" method="POST">
                 <div class="form-group">
-                    Ancien mot de passe:
-                    <input class="form-control" type="password" name="mdpFormOld" required/>
+                    <label for="mdpFormOld">Ancien mot de passe:</label>
+                    <input class="form-control" type="password" id="mdpFormOld" name="mdpFormOld" required/>
                 </div>
                 <div class="form-group">
-                    Nouveau mot de passe:
+                    <label for="mdpFormNew">Nouveau mot de passe:</label>
                     <input class="form-control" type="password" id="mdpFormNew" name="mdpFormNew" required/>
                 </div>
                 <div class="form-group">
-                    Retapez le nouveau mot de passe:
+                    <label for="mdpFormNewBis"> Retapez le nouveau mot de passe:
+</label>
                     <input class="form-control" type="password" id="mdpFormNewBis" name="mdpFormNewBis" required/>
-                </div>
+                </div> 
                 <button type="submit" class="btn btn-primary">Modification</button>
             </form>
-        </div>
+        </section>
 
 
     </body>

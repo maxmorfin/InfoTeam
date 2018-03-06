@@ -11,9 +11,7 @@
         <h1>
             <%= title %>
         </h1>
-        <p>Welcome to
-            <%= title %>
-        </p>
+        
         <% if(mailexist==1){ %>
             <div>
                 <p>Ce mail existe déjà sur infoTeam</p>
@@ -38,24 +36,30 @@
                             <% }  %>
 
         <div>
-            <form action="/personne/modification" method="POST">
-                <div class="form-group">
-                    Nom:
-                    <input class="form-control" type="text" name="nomForm" value="<%=n%>" required/>
+            <section class="container">
+                <form action="/personne/modification" method="POST">
+                    <div class="form-group">
+                        <label for="nomForm">Nom :</label>
+                        <input class="form-control" id="nomForm" type="text" name="nomForm" value="<%=n%>" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="prenomForm">Prenom :</label>
+                        <input class="form-control" id="prenomForm" type="text" name="prenomForm" value="<%=p%>" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="mailForm">Email : </label>
+                        <input class="form-control" id="mailForm" type="text" id="mailForm" name="mailForm" value="<%=m%>" required/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Modification</button>
+                </form>
+                <div class="lienModifPersonne">
+                    <a href="/personne/modifmdp">Modifier le mot de passe</a>
+                    <a href="/mail/newsletter">Abonnez vous !</a>
                 </div>
-                <div class="form-group">
-                    Prenom:
-                    <input class="form-control" type="text" name="prenomForm" value="<%=p%>" required/>
+                
                 </div>
-                <div class="form-group">
-                    Mail:
-                    <input class="form-control" type="text" id="mailForm" name="mailForm" value="<%=m%>" required/>
-                </div>
-                <button type="submit" class="btn btn-primary">Modification</button>
-            </form>
-            <a href="/personne/modifmdp">Modifier le mot de passe</a>
-            <a href="/mail/newsletter">Abonnez vous !</a>
-        </div>
+            </section>
+            
 
     </body>
 

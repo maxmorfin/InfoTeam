@@ -21,14 +21,32 @@
                 </div>
             </div>
         </div>
-        <form action="/commentaire/modifierLink/:<%= tabComI[i]%>" method="GET" class="col-md-6">
-            <button type="submit" class="btn btn-outline-success col-md-6 btnCard">
+        <div class="collapse" id="<%= tabComI[i] %>">
+        
+            <form action="/commentaire/modifierLink/:<%= tabComI[i] %>" method="POST">
+                <textarea class="card card-body" name="commentairem" id="commentaire" cols="13" rows="4"><%= tabComC[i] %></textarea>
+                <button class="btn btn-outline-primary" type="submit">Comfirmer</button>
+            </form>
+        
+        
+        </div>
+        
+        <% if(connected){ %>
+        <% if (idUserCom[i] == idUser) { %>
+            
+            <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#<%= tabComI[i] %>" aria-expanded="false"
+                aria-controls="<% tabComI[i] %>">
                 Modifier
             </button>
-        </form>
+            <form action="/commentaire/supplink/:<%= tabComI[i]%>" method="POST">
+                <button class="btn btn-outline-danger" type="submit">Supprimer</button>
+            </form>
+            <% } %>
+            <% } %>
 
         <% } %>
     </section>
+    <% include footer %>
             
     </body>
 

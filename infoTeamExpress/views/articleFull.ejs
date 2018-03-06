@@ -1,37 +1,71 @@
 <!DOCTYPE html>
 <html lang="fr">
 <% include header %>
+<% include footer %>
+
 
     <body>
 
         <!-- NAVIGATION -->
         <% include navbar %>
-
-        <% for (let i = 0; i < tabN.length; i++) {%>
-
-                    <div class="card-group" id="articleFull">
-                        <div class="card">
+        <section class="container">
+            <% for (let i = 0; i < tabN.length; i++) {%>
+            
+                <div class="card-group" id="articleFull">
+                    <div class="card">
+                        <% if(tabTag[i]=='sport') {%>
                             <img class="card-img-top" src="/images/sportCard.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title"><%= tabT[i] %></h5>
-                                <p class="card-text"><%= tabC[i] %></p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted"><%= tabD[i] %> <%= tabA[i] %></small>
-                            </div>
+                            <% } else if(tabTag[i]=='voyage') {%>
+                                <img class="card-img-top" src="/images/voyageCard.jpg" alt="Card image cap">
+                                <% } else{%>
+                                    <img class="card-img-top" src="/images/economieCard.jpg" alt="Card image cap">
+                                    <% } %>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= tabT[i] %>
+                            </h5>
+                            <p class="card-text">
+                                <%= tabC[i] %>
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">
+                                <%= tabD[i] %>
+                                <%= tabA[i] %>
+                            </small>
                         </div>
                     </div>
-                
-                <div class="col-md-4">
-                    <form action="/commentaire/affichageComArticle/:<%= idArticle %> " method="GET" class="col-md-12">
-                        <button type="submit" class="btn btn-primary col-md-6 btnCard">
-                            Commentaires
-                        </button>
-                    </form>
                 </div>
-            
- 
-        <% } %>
+                <div class="collapse" id="collapseExample">
+                    
+                        <form action="/commentaire/creation/:<%= idArticle %>" method="POST">
+                            <textarea class="card card-body" name="commentaire" id="commentaire" cols="13" rows="4"></textarea>
+                            <button class="btn btn-outline-primary" type="submit">Ajouter</button>
+                        </form>
+                        
+                    
+                </div>
+                
+                <form action="/commentaire/affichageComArticle/:<%= idArticle %> " method="GET" class="col-md-12">
+                    <button type="submit" class="btn btn-outline-primary col-md-6 btnCard">
+                        Commentaires
+                    </button>
+                </form>
+                <% if (connected){ %>
+
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                            aria-controls="collapseExample">
+                            Ajouter un commentaire
+                        </button>
+                    
+                    
+                    
+                
+                <% } %>
+                <% } %>
+        </section>
+        
+        
     </body>
 
 </html>

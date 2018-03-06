@@ -307,7 +307,7 @@ router.post('/ajouter', (req,res) => {
                         from: 'infoTeamRoger@gmail.com',
                         to: rows[i].mail,
                         subject: 'Infoteam : nouvel article: ' + data.titre,
-                        text: 'Un nouvel article est à présent disponible sur le site dans la rubrique ' + data.tag + ':' + data.titre + '. N\'hésitez pas à venir le consulter.'
+                        text: 'Un nouvel article est à présent disponible sur le site dans la rubrique ' + data.tag + 'N\'hésitez pas à venir le consulter.'
                     };
                     transporter.sendMail(mailOptions, function (error, info) {
                         if (error) {

@@ -57,7 +57,6 @@ p{
 }
 
 /* BAR DE NAVIGATION */
-
 a #lienNavBar{
   display: inline-block;
   margin: 0 auto;  
@@ -75,11 +74,18 @@ nav #titreNavBar{
 .sidebar{
   margin: 4em auto;
 }
+nav#navBarCo{
+  background: #272838 !important;
+}
+nav#navBar{
+  background: #272838 !important;
+}
+
 .nav-link{
   margin: 1em 1em;
   font-family: 'Montserrat', sans-serif;
   font-weight: bolder;
-  border: 1px solid #e3f2fd;
+  border: 1px solid #1B9AAA;
   border-radius: 2em;
   color: #1B9AAA;
   transition: all 0.9s;
@@ -134,8 +140,11 @@ label{
   text-align: center;
   display: block;
   margin: 1em auto;
-  height: 12em;
-  border-color: #1B9AAA !important;
+  height: auto;
+  border-color: #272838 !important;
+}
+.articleCard img{
+  height: 15em;
 }
 .card-title{
   text-transform: uppercase;
@@ -151,26 +160,41 @@ label{
   height: 8em;
   overflow: hidden;
 }
+.imageCard{
+  max-height: 30em;
+  
+}
 #articleFull .card-body{
   height: auto;
   overflow: visible;
 }
 .card-header{
   height: 4em;
-  color: #7D7C84;
+  color: #272838;
   font-weight: bolder;  
   text-transform: capitalize;
   text-align: left;
 }
+.card-footer{
+  background-color: #272838 !important;
+}
+
 #articleFull .card-header{
   height: auto;
 }
 .btnCard{
   display: block;
   margin: 1em auto;
-  max-width: 7em;
+  width: 11em;
   text-align: center;
+  border-color: #1B9AAA;
+  color: #1B9AAA;
   border-radius: 2em !important;
+}
+.btnCard:hover{
+  background-color: #272838;
+  border-color: #1B9AAA;
+  color: #1B9AAA;
 }
 button a{
   color: white;
@@ -193,4 +217,18 @@ button a:hover{
 }
 #btnSubmitSupp:hover{
   transform: scale(1.09);
+}
+
+/* modifPersonn */
+.lienModifPersonne{
+  text-align: center;
+}
+.lienModifPersonne a{
+  display: inline-block;
+  border: 1px solid #1B9AAA;
+  padding: 1em;
+  margin: 1em;
+  min-width: 10em;
+  border-radius: 2em;
+  text-decoration: none;   
 }

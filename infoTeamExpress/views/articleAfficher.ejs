@@ -10,12 +10,15 @@
                 <% for (let i = 0; i < tabN.length; i++) {%>
                     <div class="col-md-4">
                         <div class="oneCard">
-                            <form action="/article/afficherFull/:<%= tabN[i]%>" method="GET" class="col-md-6">
-                                <button type="submit" class="btn btn-outline-primary col-md-6 btnCard">
-                                    afficher
-                                </button>
-                            </form>
+                            
                             <div class="card border-primary mb-12 articleCard" style="max-width: 60rem;">
+                                <% if(tabTag[i]=='sport') {%>
+                                <img class="card-img-top" src="/images/sportCard.jpg" alt="Card image cap">
+                                <% } else if(tabTag[i]=='voyage') {%>
+                                    <img class="card-img-top" src="/images/voyageCard.jpg" alt="Card image cap">
+                                <% } else{%>
+                                    <img class="card-img-top" src="/images/economieCard.jpg" alt="Card image cap">
+                                <% } %>
                                 <div class="card-body text-primary">
                                     
                                     <h5 class="card-title">
@@ -33,7 +36,11 @@
                                 
                             </div>
                         </div>
-                        
+                        <form action="/article/afficherFull/:<%= tabN[i]%>" method="GET" class="col-md-12">
+                            <button type="submit" class="btn btn-outline-primary col-md-6 btnCard">
+                                afficher
+                            </button>
+                        </form>
                     </div>
                 <% } %>
             </div>
