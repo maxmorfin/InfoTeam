@@ -42,7 +42,7 @@
         <div class="collapse btnModifCom" id="<%= tabComI[i] %>">
         
             <form action="/commentaire/modifierLink/:<%= tabComI[i] %>" method="POST">
-                <input type="text" value="<%= tabComC[i] %>">
+                <input type="text" value="<%= tabComC[i] %>" name="commentairem" id="commentairem">
                 <button class="btn btn-outline-primary " type="submit"><img src="/images/validIcon.svg" alt="validIcon"></button>
             </form>
         

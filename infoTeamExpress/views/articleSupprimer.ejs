@@ -16,7 +16,13 @@
                     <div>
                         <div class="card-group" id="articleFull">
                             <div class="card">
+                            <% if(tabTag[i]=='sport') {%>
                                 <img class="card-img-top" src="/images/sportCard.jpg" alt="Card image cap">
+                                <% } else if(tabTag[i]=='voyage') {%>
+                                    <img class="card-img-top" src="/images/voyageImg.jpg" alt="Card image cap">
+                                    <% } else{%>
+                                        <img class="card-img-top" src="/images/economieCard.jpg" alt="Card image cap">
+                                        <% } %>
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         <%= tabT[i] %>

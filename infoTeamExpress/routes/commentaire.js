@@ -167,9 +167,10 @@ router.post('/modifierLink/:id', function (req, res, next) {
                     idPersonne[i] = result[i].idPersonne;
                 }
                 res.redirect("/")
-                // res.render('affichageComArticle', {
-                //     title: 'affichage des articles', connected: req.session.connected, nomUser: req.session.nomUser, idUser: req.session.idUser, tabComN: auteurCommentaire, tabComD: dateCommentaire, tabComE: etatCommentaire, tabComC: contenuCommentaire, tabComI: idCommentaire, prenomUser: req.session.prenomUser, typeUser: req.session.typeUser, idUserCom: idPersonne    
-                // });
+                // res.render('affichageComArticle', 
+                // {
+                //      title: 'affichage des articles', connected: req.session.connected, nomUser: req.session.nomUser, idUser: req.session.idUser, tabComN: auteurCommentaire, tabComD: dateCommentaire, tabComE: etatCommentaire, tabComC: contenuCommentaire, tabComI: idCommentaire, prenomUser: req.session.prenomUser, typeUser: req.session.typeUser, idUserCom: idPersonne    
+                //  });
             };
         });
     });

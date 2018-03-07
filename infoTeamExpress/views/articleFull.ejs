@@ -16,7 +16,7 @@
                         <% if(tabTag[i]=='sport') {%>
                             <img class="card-img-top" src="/images/sportCard.jpg" alt="Card image cap">
                             <% } else if(tabTag[i]=='voyage') {%>
-                                <img class="card-img-top" src="/images/voyageCard.jpg" alt="Card image cap">
+                                <img class="card-img-top" src="/images/voyageImg.jpg" alt="Card image cap">
                                 <% } else{%>
                                     <img class="card-img-top" src="/images/economieCard.jpg" alt="Card image cap">
                                     <% } %>
@@ -39,7 +39,7 @@
                 <div class="collapse btnModifCom" id="collapseExample">
                     
                         <form action="/commentaire/creation/:<%= idArticle %>" method="POST" class="formArticle">
-                            <input type="text">
+                            <input type="text" name="commentaire" id="commentaire">
                             <button class="btn btn-outline-primary btnCard" type="submit"><img src="/images/validIcon.svg" alt="validIcon"></button>
                         </form>
                         
